@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Counter from './Counter.svelte';
+	import Blitzcore from './Blitzcore.svelte';
 </script>
 
 <svelte:head>
@@ -8,7 +8,7 @@
 </svelte:head>
 
 <article>
-	<Counter />
+	<Blitzcore />
 </article>
 
 <style>
