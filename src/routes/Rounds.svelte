@@ -1,31 +1,27 @@
 <script lang="ts">
-	import { Spring } from 'svelte/motion';
+	import type { Game } from '$lib';
+	import Round from './Round.svelte';
 
   type Props = {
-    onNewGame: () => void;
+    game: Game;
   }
-  const { onNewGame }: Props = $props();
+  const { game }: Props = $props();
+	const { players, rounds } = game;
 
-	const count = new Spring(0);
-	const offset = $derived(modulo(count.current, 1));
-
-	function modulo(n: number, m: number) {
-		// handle negative numbers
-		return ((n % m) + m) % m;
-	}
 </script>
 
 <div class="rounds">
-	
+	{#each rounds as round, i}
+		<Round round={round} players={players} darker={i % 2 == 0}/>
+	{/each}
 </div>
 
 <style>
 	.rounds {
 		display: flex;
     flex-direction: column;
-		border-top: 1px solid rgba(0, 0, 0, 0.1);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-		margin: 1rem 0;
+		justify-content: flex-start;
     background-color: green;
+		z-index: 50;
 	}
 </style>
