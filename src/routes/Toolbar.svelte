@@ -15,7 +15,7 @@
 	}
 </script>
 
-<div class="counter">
+<div class="toolbar">
 	<button onclick={onNewGame} aria-label="Start a new game">
 		New Game
 	</button>
@@ -41,14 +41,14 @@
 </div>
 
 <style>
-	.counter {
+	.toolbar {
 		display: flex;
 		border-top: 1px solid rgba(0, 0, 0, 0.1);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 		margin: 1rem 0;
 	}
 
-	.counter button {
+	.toolbar button {
 		width: 2em;
 		padding: 0;
 		display: flex;
@@ -60,7 +60,7 @@
 		font-size: 2rem;
 	}
 
-	.counter button:hover {
+	.toolbar button:hover {
 		background-color: var(--color-bg-1);
 	}
 
