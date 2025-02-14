@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { Spring } from 'svelte/motion';
 
+  type Props = {
+    onNewGame: () => void;
+  }
+  const { onNewGame }: Props = $props();
+
 	const count = new Spring(0);
 	const offset = $derived(modulo(count.current, 1));
 
@@ -11,7 +16,7 @@
 </script>
 
 <div class="counter">
-	<button onclick={() => {}} aria-label="Start a new game">
+	<button onclick={onNewGame} aria-label="Start a new game">
 		New Game
 	</button>
 
