@@ -54,10 +54,12 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border: 0;
-		background-color: transparent;
+		border: 1px;
+		border-radius: 8px;
+		background-color: grey;
 		touch-action: manipulation;
 		font-size: 2rem;
+		
 	}
 
 	.toolbar button:hover {
