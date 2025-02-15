@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { addRound, roundTotal, type Game, type OutcomeRound } from '$lib';
-	import Headings from './Headings.svelte';
-	import Rounds from './Rounds.svelte';
-	import Totals from './Totals.svelte';
-
+	import { type Game } from '$lib';
+	import EditWindowPlayerBox from './EditWindowPlayerBox.svelte';
+	
   type Props = {
     game: Game
 		roundNumber: number;
@@ -13,32 +11,22 @@
 	const { players, rounds } = game;
 	const round = rounds[roundNumber];
 
-	let editingPlayer = $state(-1);
+	let playerBoxBeingEdited = $state(-1)
 </script>
 
 <div class="editwindow">
-	<h2>Round {roundNumber +1}</h2>
+	<h2>Round {roundNumber +1} - editing {playerBoxBeingEdited}</h2>
 
 	<div class="playersbox">
 		{#each players as player, i}
-			<div class="playerbox" style={`background-color: ${player.color.lowIntensity}; border-color: ${player.color.highIntensity}`}>
-				<div class="inforow">
-					<h2>{player.name}</h2>
-					<h1>{roundTotal(round.outcomes[i])}</h1>
-				</div>
-				<hr style={`color: ${player.color.highIntensity}`} />
-				<div class="inforow">
-					<h3>Blitz Cards Remaining</h3>
-					<h4>{round.outcomes[i].blitzCardsRemaining}&nbsp;</h4>
-				</div>
-				<div class="inforow">
-					<h3>Cards Played</h3>
-					<h4>{round.outcomes[i].cardsPlayed}&nbsp;</h4>
-				</div>
-			</div>
+				<EditWindowPlayerBox 
+					player={player} 
+					editing={playerBoxBeingEdited === i} 
+					outcome={round.outcomes[i]} 
+					onSelectForEditing={() => playerBoxBeingEdited = i}
+					onFinished={() => {}}/>
 		{/each}
 	</div>
-
 
 	<button onclick={onFinished} aria-label="Finished editing">
 		Done
@@ -67,16 +55,8 @@
 		width: 60vw;
 	}
 
-	h1, h2, h4 {
+	h2 {
 		font-weight: bold;
-	}
-
-	h1 {
-		text-align: right;
-		line-height: 0.9em;
-	}
-	h4 {
-		text-align: right;
 	}
 
 	.playersbox {
@@ -86,16 +66,5 @@
 		flex-direction: column;
 		justify-content: space-between;
 	}
-	.playerbox {
-		flex: 1;
-		width: 80vw;
-		border: 1px solid pink;
-		border-radius: 8px;
-		padding: 4px 8px;
-	}
 
-	.inforow {
-		display: flex;
-		justify-content: space-between;
-	}
 </style>
