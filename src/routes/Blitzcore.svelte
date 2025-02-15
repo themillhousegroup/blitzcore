@@ -1,7 +1,7 @@
 <script lang="ts">
   import Toolbar from './Toolbar.svelte';
   import Main from './Main.svelte';
-	import { addRound, BLITZ_BLUE, BLITZ_GREEN, BLITZ_RED, BLITZ_YELLOW, createNewGameForPlayers } from '$lib';
+	import { addRound, BLITZ_BLUE, BLITZ_GREEN, BLITZ_RED, BLITZ_YELLOW, createNewGameForPlayers, type OutcomeRound } from '$lib';
 	import EditWindow from './EditWindow.svelte';
 
   const DEFAULT_PLAYERS = [
@@ -43,16 +43,20 @@
     console.log(`onAddRound`);
     game = addRound(game);
 	}
-
-
-
+	function roundUpdated(roundNumber: number, newRound: OutcomeRound) {
+    game.rounds[roundNumber] = newRound;
+	}
 </script>
 
 <div class="blitzcore">
   <Main game={game} onRoundEdit={startEditing}/>
   {#if showEditWindowForRound >= 0}
     <div class="matte">
-      <EditWindow game={game} roundNumber={showEditWindowForRound || 0} onFinished={stopEditing} />
+      <EditWindow 
+        game={game} 
+        roundNumber={showEditWindowForRound} 
+        onRoundUpdate={roundUpdated}
+        onFinished={stopEditing} />
     </div>
   {/if}
   <Toolbar onNewGame={onNewGame} onAddRound={onAddRound}/>

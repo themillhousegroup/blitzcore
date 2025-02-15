@@ -2,20 +2,36 @@
 	import { roundTotal, type Player, type PlayerOutcome } from '$lib';
 	import NumericModifier from './NumericModifier.svelte';
 
-	type Props = {
+	type CoreProps = {
 		player: Player;
-		editing: boolean;
 		outcome: PlayerOutcome;
+	}
+
+	type EditModeProps = {
+		editing: true;
+		onNewOutcome: (newOutcome: PlayerOutcome) => void;
 	};
-	const { player, editing, outcome }: Props = $props();
+	type ViewModeProps = {
+		editing: false;
+		onNewOutcome?: undefined;
+	};
+
+	type Props = CoreProps & (EditModeProps | ViewModeProps);
+	const { player, editing, outcome, onNewOutcome }: Props = $props();
 
 	function onNewBlitzCardsRemaining(n: number) {
 		console.log(`New Blitz number: ${n}`)
-		outcome.blitzCardsRemaining = n;
+		editing && onNewOutcome({
+			...outcome,
+			blitzCardsRemaining: n
+		});
 	}
 	function onNewPlayedCardsRemaining(n: number) {
 		console.log(`New played number: ${n}`)
-		outcome.cardsPlayed = n;
+		editing && onNewOutcome({
+			...outcome,
+			cardsPlayed: n
+		});
 	}
 </script>
 

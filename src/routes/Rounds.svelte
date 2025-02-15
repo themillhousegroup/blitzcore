@@ -7,16 +7,14 @@
 		onRoundEdit: (roundNumber: number) => void;
   }
   const { game, onRoundEdit }: Props = $props();
-	const { players, rounds } = game;
-
 </script>
 
 <div class="rounds">
-	{#each rounds as round, i}
+	{#each game.rounds as round, i}
 		<Round 
 			roundNumber={i} 
 			round={round} 
-			players={players} 
+			players={game.players} 
 			darker={i % 2 == 0} 
 			onRoundClicked={onRoundEdit}
 		/>

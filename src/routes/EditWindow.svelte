@@ -1,29 +1,39 @@
 <script lang="ts">
-	import { type Game } from '$lib';
+		import type { Game, OutcomeRound, PlayerOutcome } from '$lib';
 	import EditWindowPlayerBox from './EditWindowPlayerBox.svelte';
 	
   type Props = {
     game: Game
 		roundNumber: number;
+		onRoundUpdate: (roundNumber: number, newRound: OutcomeRound) => void;
 		onFinished: () => void;
   }
-  const { game, roundNumber, onFinished }: Props = $props();
-	const { players, rounds } = game;
-	const round = rounds[roundNumber];
+  const { game, roundNumber, onRoundUpdate, onFinished }: Props = $props();
+	const round = $derived(game.rounds[roundNumber]);
 
-	let playerBoxBeingEdited = $state(-1)
+	let playerBoxBeingEdited = $state(-1);
+
+	function replacePlayerOutcome(i: number, newOutcome: PlayerOutcome) {
+		const before = round.outcomes.slice(0, i);
+		const after = round.outcomes.slice(i+1);
+		const newOutcomes = [...before, newOutcome, ...after];
+		onRoundUpdate(roundNumber, {
+			outcomes: newOutcomes
+		});
+	}
 </script>
 
 <div class="editwindow">
 	<h2>Round {roundNumber +1}</h2>
 
 	<div class="playersbox">
-		{#each players as player, i}
+		{#each game.players as player, i}
 			{#if playerBoxBeingEdited === i}
 				<EditWindowPlayerBox 
 					player={player} 
 					editing
 					outcome={round.outcomes[i]} 
+					onNewOutcome={(newOutcome: PlayerOutcome) => replacePlayerOutcome(i, newOutcome)}
 				/>
 			{:else}
 				<div onclickcapture={() => playerBoxBeingEdited = i}> 
