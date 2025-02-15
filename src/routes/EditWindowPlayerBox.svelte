@@ -23,15 +23,15 @@
 	class="playerbox"
 	style={`background-color: ${player.color.lowIntensity}; border-color: ${player.color.highIntensity};`}
 >
-	<div class="inforow" style={`border-bottom: 1px solid ${player.color.highIntensity};`}>
-		<h2>{player.name}</h2>
+	<div class="inforow" >
+		<h2 style={`border-bottom: 1px solid ${player.color.highIntensity}; width: 90%`}>{player.name}</h2>
 		<h1>{roundTotal(outcome)}</h1>
 	</div>
 
 	<div class={`inforow ${editing && 'inforow-editing'}`}>
 		<h4>Blitz Cards Remaining</h4>
 		{#if editing}
-			<div style={`height: 10vh;`}>
+			<div style={`height: 8vh;`}>
 				<NumericModifier
 					currentValue={outcome.blitzCardsRemaining}
 					onNewValue={onNewBlitzCardsRemaining}
@@ -45,7 +45,7 @@
 	<div class={`inforow ${editing && 'inforow-editing'}`}>
 		<h4>Cards Played</h4>
 		{#if editing}
-			<div style={`height: 10vh;`}>
+			<div style={`height: 8vh;`}>
 				<NumericModifier
 					currentValue={outcome.cardsPlayed}
 					onNewValue={onNewPlayedCardsRemaining}
@@ -69,13 +69,17 @@
 		width: 80vw;
 		border: 1px solid pink;
 		border-radius: 8px;
-		padding: 4px 8px;
+		padding: 2px 8px;
 	}
 
 	h1,
 	h2,
 	h3 {
 		font-weight: bold;
+	}
+
+	h1 {
+		font-size: 1.75em;
 	}
 
 	h1,

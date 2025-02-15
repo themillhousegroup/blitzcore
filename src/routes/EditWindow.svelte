@@ -45,14 +45,14 @@
 <style>
 	.editwindow {
 		position: absolute;
-		top: 2vh;
+		top: 2dvh;
 		left: 5vw;
 		z-index: 100;
 		opacity: 1;
 		border: 2px solid darkgray;
 		border-radius: 8px;
 		background-color: white;
-		height: 96vh;
+		height: 96dvh;
 		width: 90vw;
 		display: flex;
     flex-direction: column;
@@ -70,7 +70,7 @@
 
 	.playersbox {
 		display: flex;
-		gap: 1em;
+		gap: 1dvh;
 		flex-direction: column;
 		justify-content: space-between;
 		height: 86vh;
