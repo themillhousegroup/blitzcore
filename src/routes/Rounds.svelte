@@ -1,18 +1,25 @@
 <script lang="ts">
-	import type { Game } from '$lib';
+	import type { Game, OutcomeRound } from '$lib';
 	import Round from './Round.svelte';
 
   type Props = {
     game: Game;
+		onRoundEdit: (roundNumber: number) => void;
   }
-  const { game }: Props = $props();
+  const { game, onRoundEdit }: Props = $props();
 	const { players, rounds } = game;
 
 </script>
 
 <div class="rounds">
 	{#each rounds as round, i}
-		<Round round={round} players={players} darker={i % 2 == 0}/>
+		<Round 
+			roundNumber={i} 
+			round={round} 
+			players={players} 
+			darker={i % 2 == 0} 
+			onRoundClicked={onRoundEdit}
+		/>
 	{/each}
 </div>
 

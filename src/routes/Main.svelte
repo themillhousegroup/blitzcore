@@ -1,21 +1,22 @@
 <script lang="ts">
-	import type { Game } from '$lib';
+	import type { Game, OutcomeRound } from '$lib';
 	import Headings from './Headings.svelte';
 	import Rounds from './Rounds.svelte';
 	import Totals from './Totals.svelte';
 
   type Props = {
     game: Game | undefined;
+		onRoundEdit: (roundNumber: number) => void;
   }
-  const { game }: Props = $props();
+  const { game, onRoundEdit }: Props = $props();
 
 </script>
 
 <div class="main">
 	{#if game}
-	<Headings game={game} />
-	<Rounds game={game} />
-	<Totals game={game} />
+		<Headings game={game} />
+		<Rounds game={game} onRoundEdit={onRoundEdit}/>
+		<Totals game={game} />
 	{/if}
 </div>
 

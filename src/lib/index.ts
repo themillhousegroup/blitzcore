@@ -28,12 +28,17 @@ export type Game = {
   rounds: Array<OutcomeRound>;
 }
 
+export const roundTotal = (outcome: PlayerOutcome): number => {
+  const blitzCards = outcome.blitzCardsRemaining;
+  const playedCards = outcome.cardsPlayed;
+  return (blitzCards * -2) + playedCards;
+}
+
 export const playerTotal = (playerIndex: number, rounds: Array<OutcomeRound>): number => {
   const total = rounds.reduce((acc, rnd) => {
-    const blitzCards = rnd.outcomes[playerIndex].blitzCardsRemaining;
-    const playedCards = rnd.outcomes[playerIndex].cardsPlayed;
-    const roundTotal = (blitzCards * -2) + playedCards;
-    return acc + roundTotal;
+    const outcome = rnd.outcomes[playerIndex];
+    
+    return acc + roundTotal(outcome);
   }, 0)
   return total;
 }
