@@ -6,18 +6,18 @@
   const DEFAULT_PLAYERS = [
     {
       name: "Sophie",
-      color: BLITZ_YELLOW
-    },
-    {
-      name: "Bec",
       color: BLITZ_RED
     },
     {
-      name: "Charlie",
+      name: "Bec",
       color: BLITZ_GREEN
     },
     {
-      name: "John",
+      name: "Charlie",
+      color: BLITZ_YELLOW
+    },
+    {
+      name: "Johnny",
       color: BLITZ_BLUE
     }
   ]
@@ -34,8 +34,9 @@
 </script>
 
 <div class="blitzcore">
-  <Toolbar onNewGame={onNewGame} onAddRound={onAddRound}/>
   <Main game={game} />
+  <Toolbar onNewGame={onNewGame} onAddRound={onAddRound}/>
+
 </div>
 
 <style>

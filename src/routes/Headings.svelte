@@ -10,7 +10,7 @@
 
 <div class="headings">
   {#each players as player}
-    <div class="heading" style={`background-color: ${player.color.rgbTriple}`}>{player.name}</div>  
+    <div class="heading" style={`background-color: ${player.color.normal}`}>{player.name}</div>  
   {/each}
 </div>
 

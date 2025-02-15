@@ -2,6 +2,7 @@
 	import type { Game } from '$lib';
 	import Headings from './Headings.svelte';
 	import Rounds from './Rounds.svelte';
+	import Totals from './Totals.svelte';
 
   type Props = {
     game: Game | undefined;
@@ -14,6 +15,7 @@
 	{#if game}
 	<Headings game={game} />
 	<Rounds game={game} />
+	<Totals game={game} />
 	{/if}
 </div>
 
@@ -23,6 +25,6 @@
 		display: flex;
     flex-direction: column;
 		justify-content: flex-start;
-    background-color: red;
+		background-color: white;
 	}
 </style>

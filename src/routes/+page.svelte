@@ -17,7 +17,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		background-color: black;
 		height: 100vh;
 		width: 100vw;
 	}

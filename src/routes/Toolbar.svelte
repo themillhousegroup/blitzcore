@@ -32,23 +32,20 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		gap: 1em;
 		width: 100%;
-		border-top: 1px solid green;
-		border-bottom: 1px solid green;
 		margin: 0;
-		background-color: pink;
 		z-index: 50;
 	}
 
 	.toolbar button {
-		width: 5em;
-		padding: 0;
+		flex: 1;
+		padding: 4px;
 		border: 1px;
 		border-radius: 8px;
+		margin: 4px;
 		background-color: grey;
 		touch-action: manipulation;
-		font-size: 2rem;
-		
 	}
 
 	.toolbar button:hover {

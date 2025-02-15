@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Game, OutcomeRound, Player } from '$lib';
+	import Cell from './Cell.svelte';
 
   type Props = {
     round: OutcomeRound;
@@ -12,7 +13,9 @@
 
 <div class="round">
 	{#each players as player}
-		<div class="cell" style={`background-color: ${darker ? player.color.lowIntensity : player.color.highIntensity}`}></div>
+		<Cell forPlayer={player} colorMode={darker ? "LOW" : "HIGH"}>
+			<span></span>
+		</Cell>
 	{/each}
 </div>
 
@@ -23,11 +26,5 @@
 		justify-content: space-between;
 		align-items: stretch;
     background-color: white;
-	}
-
-	.cell {
-		flex: 1;
-		height: 2em;
-		width: 2em;
 	}
 </style>

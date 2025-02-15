@@ -1,12 +1,12 @@
 // place files you want to import through the `$lib` alias in this folder.
 
-type RGBTriple = `#${string}`
+type RGBAQuad = `#${string}`
 
 export type DutchBlitzColor = {
   colorName: "RED" | "GREEN" | "YELLOW" | "BLUE";
-  rgbTriple: RGBTriple;
-  lowIntensity: RGBTriple;
-  highIntensity: RGBTriple;
+  normal: RGBAQuad;
+  lowIntensity: RGBAQuad;
+  highIntensity: RGBAQuad;
 }
 
 export type Player = {
@@ -28,29 +28,56 @@ export type Game = {
   rounds: Array<OutcomeRound>;
 }
 
+export const playerTotal = (playerIndex: number, rounds: Array<OutcomeRound>): number => {
+  const total = rounds.reduce((acc, rnd) => {
+    const blitzCards = rnd.outcomes[playerIndex].blitzCardsRemaining;
+    const playedCards = rnd.outcomes[playerIndex].cardsPlayed;
+    const roundTotal = (blitzCards * -2) + playedCards;
+    return acc + roundTotal;
+  }, 0)
+  return total;
+}
+
+export type ColorMode = "NORMAL" | "LOW" | "HIGH"
+
 export const BLITZ_RED:DutchBlitzColor = {
   colorName: "RED",
-  rgbTriple: "#dd222280",
+  normal: "#dd222280",
   lowIntensity: "#bb444460",
   highIntensity: "#bb444470",
 }
 export const BLITZ_GREEN:DutchBlitzColor = {
   colorName: "GREEN",
-  rgbTriple: "#22dd2280",
+  normal: "#22dd2280",
   lowIntensity: "#44bb4460",
   highIntensity: "#44bb4470",
 }
 export const BLITZ_YELLOW:DutchBlitzColor = {
   colorName: "YELLOW",
-  rgbTriple: "#dddd0080",
+  normal: "#dddd0080",
   lowIntensity: "#bbbb4460",
   highIntensity: "#bbbb4470",
 }
 export const BLITZ_BLUE:DutchBlitzColor = {
   colorName: "BLUE",
-  rgbTriple: "#2222dd80",
+  normal: "#2222dd80",
   lowIntensity: "#4444bb60",
   highIntensity: "#4444bb70",
+}
+
+export const deriveColor = (color: DutchBlitzColor, colorMode?: ColorMode): RGBAQuad => {
+  if (!colorMode) {
+    return color.normal;
+  }
+  
+  switch(colorMode) {
+    case "LOW":
+      return color.lowIntensity;
+    case "HIGH":
+      return color.highIntensity;
+    default:
+      return color.normal;
+  }
 }
 
 export const createNewGameForPlayers = (players: Array<Player>): Game => {
