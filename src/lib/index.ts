@@ -60,8 +60,8 @@ export const BLITZ_GREEN:DutchBlitzColor = {
 export const BLITZ_YELLOW:DutchBlitzColor = {
   colorName: "YELLOW",
   normal: "#dddd0080",
-  lowIntensity: "#bbbb4460",
-  highIntensity: "#bbbb4470",
+  lowIntensity: "#dddd0060",
+  highIntensity: "#dddd0070",
 }
 export const BLITZ_BLUE:DutchBlitzColor = {
   colorName: "BLUE",

@@ -22,17 +22,19 @@
 	<div class="playersbox">
 		{#each players as player, i}
 			<div class="playerbox" style={`background-color: ${player.color.lowIntensity}; border-color: ${player.color.highIntensity}`}>
-				<h2>{player.name}</h2>
+				<div class="inforow">
+					<h2>{player.name}</h2>
+					<h1>{roundTotal(round.outcomes[i])}</h1>
+				</div>
+				<hr style={`color: ${player.color.highIntensity}`} />
 				<div class="inforow">
 					<h3>Blitz Cards Remaining</h3>
-					<h4>{round.outcomes[i].blitzCardsRemaining}</h4>
+					<h4>{round.outcomes[i].blitzCardsRemaining}&nbsp;</h4>
 				</div>
 				<div class="inforow">
 					<h3>Cards Played</h3>
-					<h4>{round.outcomes[i].cardsPlayed}</h4>
+					<h4>{round.outcomes[i].cardsPlayed}&nbsp;</h4>
 				</div>
-
-				<h1>{roundTotal(round.outcomes[i])}</h1>
 			</div>
 		{/each}
 	</div>
@@ -69,7 +71,11 @@
 		font-weight: bold;
 	}
 
-	h1, h4 {
+	h1 {
+		text-align: right;
+		line-height: 0.9em;
+	}
+	h4 {
 		text-align: right;
 	}
 
