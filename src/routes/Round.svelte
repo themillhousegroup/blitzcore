@@ -17,9 +17,9 @@
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? "LOW" : "HIGH"}>
 			<div class='cell-inner'>
-				{round.outcomes[i].blitzCardsRemaining}
-				{round.outcomes[i].cardsPlayed}
-				{roundTotal(round.outcomes[i])}
+				<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
+				<div>{round.outcomes[i].cardsPlayed}</div>
+				<div class="sum">{roundTotal(round.outcomes[i])}</div>
 			</div>
 		</Cell>
 	{/each}
@@ -38,5 +38,21 @@
 		font-weight: normal;
 		text-align: center;
 		line-height: 2em;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+	}
+	.card {
+		font-size: 0.75em;
+		color: white;
+		border-radius: 0.3em;
+		width: 1.3em;
+		border: 1px solid white;
+	}
+
+	.sum {
+		font-weight: bold;
 	}
 </style>
