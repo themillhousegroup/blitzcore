@@ -15,16 +15,25 @@
 </script>
 
 <div class="editwindow">
-	<h2>Round {roundNumber +1} - editing {playerBoxBeingEdited}</h2>
+	<h2>Round {roundNumber +1}</h2>
 
 	<div class="playersbox">
 		{#each players as player, i}
+			{#if playerBoxBeingEdited === i}
 				<EditWindowPlayerBox 
 					player={player} 
-					editing={playerBoxBeingEdited === i} 
+					editing
 					outcome={round.outcomes[i]} 
-					onSelectForEditing={() => playerBoxBeingEdited = i}
-					onFinished={() => {}}/>
+				/>
+			{:else}
+				<div onclickcapture={() => playerBoxBeingEdited = i}> 
+					<EditWindowPlayerBox 
+						player={player} 
+						editing={false}
+						outcome={round.outcomes[i]} 
+					/>
+				</div>
+			{/if}
 		{/each}
 	</div>
 
@@ -60,11 +69,11 @@
 	}
 
 	.playersbox {
-		flex: 1;
 		display: flex;
 		gap: 1em;
 		flex-direction: column;
 		justify-content: space-between;
+		height: 86vh;
 	}
 
 </style>

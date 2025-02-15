@@ -18,7 +18,7 @@
 }
 
 body {
-	min-height: 100vh;
+	height: 100vh;
 	margin: 0;
 	background-attachment: fixed;
 	background-color: var(--color-bg-1);
@@ -111,6 +111,7 @@ button {
 	margin: 4px;
 	background-color: grey;
 	touch-action: manipulation;
+	text-align: center;
 }
 
 .visually-hidden {
