@@ -1,4 +1,20 @@
-# sv
+# Blitzcore
+
+A scoring app for Dutch Blitz, in Svelte/SvelteKit
+
+## TODO
+- Contextual expansion - i.e. make the newly-added row bigger and easier to hit
+- Subtle animation on row expansion / player focus in edit window
+- Player entry window
+- Store player data in cookie for persistence
+- Improve button styling
+- Ensure buttons don't get focus in Chrome iOS
+- Simplify top-level DOM, try and avoid any scrolling issues
+- Scroll the list of rounds if it gets really long
+- Toggle to go between normal view and running-total view
+- Improve rendering of individual cells in round view
+
+
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
