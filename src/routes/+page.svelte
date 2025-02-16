@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.css';
 	import Blitzcore from './Blitzcore.svelte';
 </script>
 
