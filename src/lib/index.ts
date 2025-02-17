@@ -89,7 +89,7 @@ export const deriveColor = (color: DutchBlitzColor, colorMode?: ColorMode): RGBA
 export const createNewGameForPlayers = (players: Array<Player>): Game => {
   return {
     players,
-    rounds: [createRound(players.length)]
+    rounds: [createRound(players.length)],
     focusedRoundIndex: 0
   }
 }
