@@ -7,13 +7,14 @@
     round: OutcomeRound;
 		players: Array<Player>
 		darker: boolean;
+		focused: boolean;
 		onRoundClicked: (roundNumber: number) => void;
 	}
-  const { roundNumber, round, players, darker, onRoundClicked }: Props = $props();
+  const { roundNumber, round, players, darker, focused, onRoundClicked }: Props = $props();
 
 </script>
 
-<div class="round" onclickcapture={() => onRoundClicked(roundNumber)}> 
+<div class={`round ${focused ? 'focused' : ''}`} onclickcapture={() => onRoundClicked(roundNumber)}> 
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? "LOW" : "HIGH"}>
 			<div class='cell-inner'>
@@ -28,11 +29,15 @@
 <style>
 	.round {
 		display: flex;
-    flex-direction: row;
+    		flex-direction: row;
 		justify-content: space-between;
 		align-items: stretch;
-    background-color: white;
+    		background-color: white;
 	}
+
+        .round.focused {
+		height: 2.5em;
+        }
 
 	.cell-inner {
 		font-weight: normal;
