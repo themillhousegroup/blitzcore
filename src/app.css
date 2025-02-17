@@ -108,10 +108,11 @@ button {
 	border: 1px;
 	border-radius: 8px;
 	margin: 4px;
-	background-color: grey;
-	touch-action: manipulation;
 	text-align: center;
-	color: lightgray;
+	color: black;
+
+	  background: linear-gradient(145deg, #cacccf, #fff);
+  	box-shadow: 9.91px 9.91px 15px #d9dade, -9.91px -9.91px 15px #fff;
 }
 
 .visually-hidden {
