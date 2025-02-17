@@ -10,7 +10,9 @@
 
 <div class="headings">
   {#each players as player}
-    <div class="heading" style={`background-color: ${player.color.normal}`}>{player.name}</div>  
+    <div class="heading" style={`background-color: ${player.color.normal}`}>
+	<span class="name>{player.name}</span>
+   </div>  
   {/each}
 </div>
 
@@ -30,6 +32,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: rotate(-20deg);
+    
 	}
+
+.name {
+transform: rotate(-20deg);
+}
 </style>
