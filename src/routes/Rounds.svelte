@@ -16,6 +16,7 @@
 			round={round} 
 			players={game.players} 
 			darker={i % 2 == 0} 
+			focused={i === game.focusedRoundIndex}
 			onRoundClicked={onRoundEdit}
 		/>
 	{/each}
