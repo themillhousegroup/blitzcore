@@ -36,7 +36,8 @@
 	}
 
         .round.focused {
-		height: 2.5em;
+		border-top: 2px solid white;
+		border-bottom: 2px solid white;
         }
 
 	.cell-inner {
