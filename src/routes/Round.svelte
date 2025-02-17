@@ -52,10 +52,14 @@
 	}
 	.card {
 		font-size: 0.75em;
-		color: white;
+		color: black;
 		border-radius: 0.3em;
 		width: 1.3em;
 		border: 1px solid white;
+
+		    margin: 0.1em;
+		    line-height: 1.8em;
+		    background-color: white;
 	}
 
 	.sum {
