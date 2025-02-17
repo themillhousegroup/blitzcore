@@ -26,6 +26,7 @@ export type OutcomeRound = {
 export type Game = {
   players: Array<Player>;
   rounds: Array<OutcomeRound>;
+  focusedRoundIndex: number;
 }
 
 export const roundTotal = (outcome: PlayerOutcome): number => {
@@ -89,6 +90,7 @@ export const createNewGameForPlayers = (players: Array<Player>): Game => {
   return {
     players,
     rounds: [createRound(players.length)]
+    focusedRoundIndex: 0
   }
 }
 
@@ -97,7 +99,8 @@ export const addRound = (game: Game): Game => {
   rounds.push(createRound(players.length));
   return {
     players,
-    rounds
+    rounds,
+    focusedRoundIndex: rounds.length -1
   }
 }
 
