@@ -1,25 +1,22 @@
 <script lang="ts">
-	import { Spring } from 'svelte/motion';
-
   type Props = {
     onNewGame: () => void;
     onAddRound: () => void;
   }
   const { onNewGame, onAddRound }: Props = $props();
-
-	const count = new Spring(0);
-	const offset = $derived(modulo(count.current, 1));
-
-	function modulo(n: number, m: number) {
-		// handle negative numbers
-		return ((n % m) + m) % m;
-	}
+  function confirmNewGame() {
+	if (confirm("Are you sure you want to start a new game?")) {
+		onNewGame();
+        }
+  }
 </script>
 
 <div class="toolbar">
-	<button onclick={onNewGame} aria-label="Start a new game">
+	<button onclick={confirmNewGame} aria-label="Start a new game">
 		New Game
 	</button>
+
+        <!-- todo: toggle between visual modes here -->
 
 	<button onclick={onAddRound} aria-label="Start a new game">
 		Add Round
@@ -45,7 +42,6 @@
 		border-radius: 8px;
 		margin: 4px;
 		background-color: grey;
-		touch-action: manipulation;
 	}
 
 	.toolbar button:hover {
