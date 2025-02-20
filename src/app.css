@@ -23,7 +23,7 @@ body {
 	margin: 0;
 	border: 0;
 	padding: 0;
-	
+	touch-action: manipulation;
 	background-color: var(--color-bg-1);
 }
 
@@ -109,7 +109,7 @@ button {
 	border-radius: 8px;
 	margin: 4px;
 	text-align: center;
-	color: #dddddd;
+	color: #111111;
 
 	  background: linear-gradient(145deg, #cacccf, #fff);
 }
