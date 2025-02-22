@@ -66,9 +66,9 @@ export const BLITZ_YELLOW:DutchBlitzColor = {
 }
 export const BLITZ_BLUE:DutchBlitzColor = {
   colorName: "BLUE",
-  normal: "#2222dd80",
-  lowIntensity: "#4444bb60",
-  highIntensity: "#4444bb70",
+  normal: "#1111dd80",
+  lowIntensity: "#1111bb60",
+  highIntensity: "#1111bb70",
 }
 
 export const deriveColor = (color: DutchBlitzColor, colorMode?: ColorMode): RGBAQuad => {
