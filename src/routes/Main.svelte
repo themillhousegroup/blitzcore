@@ -22,10 +22,13 @@
 
 <style>
 	.main {
-		flex: 10;
+		height: 90dvh;
+		max-height: 90dvh;
+		flex: 0;
 		display: flex;
-    flex-direction: column;
+    		flex-direction: column;
 		justify-content: flex-start;
 		background-color: white;
+		overflow-y: scroll;
 	}
 </style>
