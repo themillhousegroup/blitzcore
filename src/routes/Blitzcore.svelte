@@ -1,8 +1,9 @@
 <script lang="ts">
   import Toolbar from './Toolbar.svelte';
   import Main from './Main.svelte';
-	import { addRound, BLITZ_BLUE, BLITZ_GREEN, BLITZ_RED, BLITZ_YELLOW, createNewGameForPlayers, type OutcomeRound } from '$lib';
+	import { addRound, BLITZ_BLUE, BLITZ_GREEN, BLITZ_RED, BLITZ_YELLOW, createNewGameForPlayers, type OutcomeRound, type GameSetup } from '$lib';
 	import EditWindow from './EditWindow.svelte';
+import NewGameWindow from './NewGameWindow.svelte';
 
   const DEFAULT_PLAYERS = [
     {
@@ -24,8 +25,9 @@
   ]
 
 
-  let game = $state(createNewGameForPlayers(DEFAULT_PLAYERS));
+  let game: Game | undefined = $state(undefined);
 
+let showNewGameWindow: boolean = $state(false);
   let showEditWindowForRound: number = $state(-1);
 
   function startEditing(roundNumber: number) {
@@ -36,9 +38,15 @@
   }
 
   function onNewGame() {
-    console.log(`NewGame`);
-    game = createNewGameForPlayers(DEFAULT_PLAYERS);
-	}
+    	console.log(`NewGame`);
+	showNewGameWindow = true;
+  }
+
+  function onNewGameSetupFinished(newGameSetup: GameSetup) {
+    	showNewGameWindow = false;
+game = createNewGameForPlayers(newGameSetup);
+
+  }
 	function onAddRound() {
     console.log(`onAddRound`);
     game = addRound(game);
@@ -50,6 +58,15 @@
 
 <div class="blitzcore">
   <Main game={game} onRoundEdit={startEditing}/>
+{#if showNewGameWindow}
+    <div class="matte">
+      <NewGameWindow 
+        previousGame={game} 
+        onFinished={onNewGameSetupFinished} 
+       />
+    </div>
+{/if}
+
   {#if showEditWindowForRound >= 0}
     <div class="matte">
       <EditWindow 
