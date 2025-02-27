@@ -3,12 +3,11 @@
 	import Cell from './Cell.svelte';
 	import Round from './Round.svelte';
 
-  type Props = {
-    game: Game;
-  }
-  const { game }: Props = $props();
+	type Props = {
+		game: Game;
+	};
+	const { game }: Props = $props();
 	const { players, rounds } = game;
-
 </script>
 
 <div class="totals">
@@ -35,5 +34,4 @@
 		text-align: center;
 		line-height: 2em;
 	}
-
 </style>

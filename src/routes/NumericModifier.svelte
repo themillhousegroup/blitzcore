@@ -1,21 +1,30 @@
 <script lang="ts">
-  type Props = {
+	type Props = {
 		currentValue: number;
-    onNewValue: (n: number) => void;
-		mode: "BLITZ" | "PLAYED"
-  }
-  const { currentValue, onNewValue, mode }: Props = $props();
+		onNewValue: (n: number) => void;
+		mode: 'BLITZ' | 'PLAYED';
+	};
+	const { currentValue, onNewValue, mode }: Props = $props();
 </script>
 
 <div class="modifier">
-	{#if mode === "BLITZ"}
-		{#each { length: 11}, num}
-		<button class={`card ${(currentValue === num) ? 'selected' : ''}`} onclick={() => onNewValue(num)} aria-label={`Select ${num}`}>
-			{num}
-		</button>
+	{#if mode === 'BLITZ'}
+		{#each { length: 11 }, num}
+			<button
+				class={`card ${currentValue === num ? 'selected' : ''}`}
+				onclick={() => onNewValue(num)}
+				aria-label={`Select ${num}`}
+			>
+				{num}
+			</button>
 		{/each}
 	{:else}
-		<button class="incdec" onclick={() => onNewValue(currentValue - 1)} aria-label="-1" disabled={currentValue === 0}>
+		<button
+			class="incdec"
+			onclick={() => onNewValue(currentValue - 1)}
+			aria-label="-1"
+			disabled={currentValue === 0}
+		>
 			-1
 		</button>
 
@@ -26,10 +35,10 @@
 		<button class="incdec" onclick={() => onNewValue(currentValue + 1)} aria-label="+1">
 			+1
 		</button>
-		<button  class="incdec" onclick={() => onNewValue(currentValue + 5)} aria-label="+5">
+		<button class="incdec" onclick={() => onNewValue(currentValue + 5)} aria-label="+5">
 			+5
 		</button>
-		<button  class="incdec" onclick={() => onNewValue(currentValue + 10)} aria-label="+10">
+		<button class="incdec" onclick={() => onNewValue(currentValue + 10)} aria-label="+10">
 			+10
 		</button>
 	{/if}
@@ -75,5 +84,4 @@
 		color: var(--color-theme-1);
 		font-size: 2.75em;
 	}
-
 </style>

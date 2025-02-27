@@ -5,7 +5,7 @@
 	type CoreProps = {
 		player: Player;
 		outcome: PlayerOutcome;
-	}
+	};
 
 	type EditModeProps = {
 		editing: true;
@@ -20,18 +20,20 @@
 	const { player, editing, outcome, onNewOutcome }: Props = $props();
 
 	function onNewBlitzCardsRemaining(n: number) {
-		console.log(`New Blitz number: ${n}`)
-		editing && onNewOutcome({
-			...outcome,
-			blitzCardsRemaining: n
-		});
+		console.log(`New Blitz number: ${n}`);
+		editing &&
+			onNewOutcome({
+				...outcome,
+				blitzCardsRemaining: n
+			});
 	}
 	function onNewPlayedCardsRemaining(n: number) {
-		console.log(`New played number: ${n}`)
-		editing && onNewOutcome({
-			...outcome,
-			cardsPlayed: n
-		});
+		console.log(`New played number: ${n}`);
+		editing &&
+			onNewOutcome({
+				...outcome,
+				cardsPlayed: n
+			});
 	}
 </script>
 
@@ -39,8 +41,10 @@
 	class="playerbox"
 	style={`background-color: ${player.color.lowIntensity}; border-color: ${player.color.highIntensity};`}
 >
-	<div class="inforow" >
-		<h2 style={`border-bottom: 1px solid ${player.color.highIntensity}; width: 90%`}>{player.name}</h2>
+	<div class="inforow">
+		<h2 style={`border-bottom: 1px solid ${player.color.highIntensity}; width: 90%`}>
+			{player.name}
+		</h2>
 		<h1>{roundTotal(outcome)}</h1>
 	</div>
 
