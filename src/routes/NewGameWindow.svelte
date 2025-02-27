@@ -22,10 +22,10 @@
 </script>
 
 <div class="newgamewindow">
-	<h2>Round {roundNumber +1}</h2>
+	<h2>New Game</h2>
 
 	<div class="playersbox">
-		{#each game.players as player, i}
+		{#each previousGame.players as player, i}
 			{#if playerBoxBeingEdited === i}
 				<EditWindowPlayerBox 
 					player={player} 
