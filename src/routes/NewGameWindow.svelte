@@ -3,12 +3,10 @@
 	import EditWindowPlayerBox from './EditWindowPlayerBox.svelte';
 	
   type Props = {
-    game: Game
-		roundNumber: number;
-		onRoundUpdate: (roundNumber: number, newRound: OutcomeRound) => void;
-		onFinished: () => void;
+    previousGame: Game | undefined;
+    onFinished: (newGameSetup: GameSetup) => void;
   }
-  const { game, roundNumber, onRoundUpdate, onFinished }: Props = $props();
+  const { previousGame, onFinished }: Props = $props();
 	const round = $derived(game.rounds[roundNumber]);
 
 	let playerBoxBeingEdited = $state(-1);
