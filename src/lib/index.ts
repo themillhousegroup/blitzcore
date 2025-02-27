@@ -14,6 +14,12 @@ export type Player = {
   color: DutchBlitzColor;
 }
 
+type TwoPlayerGame = readonly [Player, Player];
+type ThreePlayerGame = readonly [Player, Player, Player];
+type FourPlayerGame = readonly [Player, Player, Player, Player];
+
+export type GameSetup = TwoPlayerGame | ThreePlayerGame | FourPlayerGame;
+
 export type PlayerOutcome = {
   blitzCardsRemaining: number;
   cardsPlayed: number;
