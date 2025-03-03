@@ -24,6 +24,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: stretch;
+		gap: 1px;
 		z-index: 50;
 		border-top: 2px solid darkgray;
 		border-bottom: 2px solid darkgray;

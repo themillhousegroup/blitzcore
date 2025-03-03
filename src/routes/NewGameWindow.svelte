@@ -50,7 +50,7 @@
 		} 
 	}
 
-	let newPlayerArray: Array<Player> = $state(previousPlayers.length === 0 ? [...DEFAULT_PLAYERS] : [...previousPlayers);
+	let newPlayerArray: Array<Player> = $state(previousPlayers.length === 0 ? [...DEFAULT_PLAYERS] : [...previousPlayers]);
 
 
 	const updatePlayer = (playerIdx: number) => (newPlayerInfo:Player) => {

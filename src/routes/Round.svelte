@@ -32,6 +32,7 @@
 		justify-content: space-between;
 		align-items: stretch;
 		background-color: white;
+		gap: 1px;
 	}
 
 	.round.focused {

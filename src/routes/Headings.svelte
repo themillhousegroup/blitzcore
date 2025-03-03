@@ -22,6 +22,7 @@
 		flex-direction: row;
 		justify-content: space-evenly;
 		background-color: white;
+		gap: 1px;
 	}
 
 	.heading {
