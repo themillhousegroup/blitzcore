@@ -2,16 +2,19 @@
 	import Toolbar from './Toolbar.svelte';
 	import Main from './Main.svelte';
 	import {
-		addRound,
-		createNewGameForPlayers,
 		type OutcomeRound,
 		type GameSetup,
-		type Game
+		type Player,
+
+		createRound
+
 	} from '$lib';
 	import EditWindow from './EditWindow.svelte';
 	import NewGameWindow from './NewGameWindow.svelte';
 
-	let game: Game | undefined = $state(undefined);
+	let players: Array<Player> = $state([]);
+	let rounds: Array<OutcomeRound> = $state([]);
+	let focusedRoundIndex: number = $state(0);
 
 	let showNewGameWindow: boolean = $state(true);
 	let showEditWindowForRound: number = $state(-1);
@@ -24,46 +27,49 @@
 	}
 
 	function onNewGame() {
-		console.log(`NewGame`);
 		showNewGameWindow = true;
 	}
 
 	function onNewGameSetupFinished(newGameSetup: GameSetup) {
 		showNewGameWindow = false;
-		game = createNewGameForPlayers(newGameSetup);
+		focusedRoundIndex = 0;
+		players = newGameSetup as unknown as Array<Player>;
+		rounds = [createRound(newGameSetup.length)];
 	}
+
 	function onAddRound() {
-		console.log(`onAddRound`);
-		if (game) {
-			game = addRound(game);
+		if (rounds) {
+			rounds.push(createRound(players.length));
+			focusedRoundIndex = rounds.length - 1
 		}
 	}
 	function roundUpdated(roundNumber: number, newRound: OutcomeRound) {
-		if (game) {
-			game.rounds[roundNumber] = newRound;
+		if (rounds.length > roundNumber) {
+			rounds[roundNumber] = newRound;
 		}
 	}
 </script>
 
 <div class="blitzcore">
-	<Main {game} onRoundEdit={startEditing} />
+	<Main {players} {focusedRoundIndex} {rounds} onRoundEdit={startEditing} />
 	{#if showNewGameWindow}
 		<div class="matte">
-			<NewGameWindow previousGame={game} onFinished={onNewGameSetupFinished} />
+			<NewGameWindow previousPlayers={players} onFinished={onNewGameSetupFinished} />
 		</div>
 	{/if}
 
-	{#if game && showEditWindowForRound >= 0}
+	{#if showEditWindowForRound >= 0}
 		<div class="matte">
 			<EditWindow
-				{game}
+				round={rounds[showEditWindowForRound]}
 				roundNumber={showEditWindowForRound}
+				{players}
 				onRoundUpdate={roundUpdated}
 				onFinished={stopEditing}
 			/>
 		</div>
 	{/if}
-	<Toolbar existingGame={game} {onNewGame} {onAddRound} />
+	<Toolbar {onNewGame} {onAddRound} />
 </div>
 
 <style>

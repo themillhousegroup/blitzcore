@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { playerTotal, type Game } from '$lib';
+	import { playerTotal, type OutcomeRound, type Player, } from '$lib';
 	import Cell from './Cell.svelte';
 	import Round from './Round.svelte';
 
 	type Props = {
-		game: Game;
+		players: Array<Player>;
+			rounds: Array<OutcomeRound>;
 	};
-	const { game }: Props = $props();
-	const { players, rounds } = game;
+	const { players, rounds }: Props = $props();
 </script>
 
 <div class="totals">

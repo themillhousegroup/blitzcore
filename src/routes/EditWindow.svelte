@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { Game, OutcomeRound, PlayerOutcome } from '$lib';
+	import type { OutcomeRound, Player, PlayerOutcome } from '$lib';
 	import EditWindowPlayerBox from './EditWindowPlayerBox.svelte';
 
 	type Props = {
-		game: Game;
+		round: OutcomeRound;
 		roundNumber: number;
+		players: Array<Player>;
 		onRoundUpdate: (roundNumber: number, newRound: OutcomeRound) => void;
 		onFinished: () => void;
 	};
-	const { game, roundNumber, onRoundUpdate, onFinished }: Props = $props();
-	const round = $derived(game.rounds[roundNumber]);
+	const { round, roundNumber, players, onRoundUpdate, onFinished }: Props = $props();
 
 	let playerBoxBeingEdited = $state(-1);
 
@@ -27,7 +27,7 @@
 	<h2>Round {roundNumber + 1}</h2>
 
 	<div class="playersbox">
-		{#each game.players as player, i}
+		{#each players as player, i}
 			{#if playerBoxBeingEdited === i}
 				<EditWindowPlayerBox
 					{player}

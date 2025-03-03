@@ -10,7 +10,7 @@
 	};
 	const { children, forPlayer, colorMode, focused }: Props = $props();
 
-	const bgColor = deriveColor(forPlayer.color, colorMode);
+	const bgColor = $derived(deriveColor(forPlayer.color, colorMode));
 </script>
 
 <div class={`cell ${focused ? 'focused' : ''}`} style={`background-color: ${bgColor}`}>

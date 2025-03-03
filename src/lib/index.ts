@@ -29,12 +29,6 @@ export type OutcomeRound = {
 	outcomes: Array<PlayerOutcome>;
 };
 
-export type Game = {
-	players: Array<Player>;
-	rounds: Array<OutcomeRound>;
-	focusedRoundIndex: number;
-};
-
 export const roundTotal = (outcome: PlayerOutcome): number => {
 	const blitzCards = outcome.blitzCardsRemaining;
 	const playedCards = outcome.cardsPlayed;
@@ -72,9 +66,9 @@ export const BLITZ_YELLOW: DutchBlitzColor = {
 };
 export const BLITZ_BLUE: DutchBlitzColor = {
 	colorName: 'BLUE',
-	normal: '#1111dd80',
-	lowIntensity: '#1111bb60',
-	highIntensity: '#1111bb70'
+	normal: '#0000dd80',
+	lowIntensity: '#0000bb60',
+	highIntensity: '#0000bb70'
 };
 
 export const deriveColor = (color: DutchBlitzColor, colorMode?: ColorMode): RGBAQuad => {
@@ -92,25 +86,7 @@ export const deriveColor = (color: DutchBlitzColor, colorMode?: ColorMode): RGBA
 	}
 };
 
-export const createNewGameForPlayers = (newPlayers: GameSetup): Game => {
-	return {
-		players: newPlayers as unknown as Array<Player>,
-		rounds: [createRound(newPlayers.length)],
-		focusedRoundIndex: 0
-	};
-};
-
-export const addRound = (game: Game): Game => {
-	const { players, rounds } = game;
-	rounds.push(createRound(players.length));
-	return {
-		players,
-		rounds,
-		focusedRoundIndex: rounds.length - 1
-	};
-};
-
-const createRound = (numPlayers: number): OutcomeRound => {
+export const createRound = (numPlayers: number): OutcomeRound => {
 	const outcomes: Array<PlayerOutcome> = [];
 
 	for (let p = 0; p < numPlayers; p++) {

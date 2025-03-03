@@ -20,7 +20,6 @@
 	const { player, editing, outcome, onNewOutcome }: Props = $props();
 
 	function onNewBlitzCardsRemaining(n: number) {
-		console.log(`New Blitz number: ${n}`);
 		editing &&
 			onNewOutcome({
 				...outcome,
@@ -28,7 +27,6 @@
 			});
 	}
 	function onNewPlayedCardsRemaining(n: number) {
-		console.log(`New played number: ${n}`);
 		editing &&
 			onNewOutcome({
 				...outcome,

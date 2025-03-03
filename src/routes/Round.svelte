@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { roundTotal, type Game, type OutcomeRound, type Player } from '$lib';
+	import { roundTotal, type OutcomeRound, type Player } from '$lib';
 	import Cell from './Cell.svelte';
 
 	type Props = {

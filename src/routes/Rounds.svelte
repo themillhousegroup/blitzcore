@@ -1,22 +1,24 @@
 <script lang="ts">
-	import type { Game, OutcomeRound } from '$lib';
+	import type { OutcomeRound, Player } from '$lib';
 	import Round from './Round.svelte';
 
 	type Props = {
-		game: Game;
+		players: Array<Player>;
+		rounds: Array<OutcomeRound>;
+		focusedRoundIndex: number;
 		onRoundEdit: (roundNumber: number) => void;
 	};
-	const { game, onRoundEdit }: Props = $props();
+	const { players, rounds, focusedRoundIndex, onRoundEdit }: Props = $props();
 </script>
 
 <div class="rounds">
-	{#each game.rounds as round, i}
+	{#each rounds as round, i}
 		<Round
 			roundNumber={i}
 			{round}
-			players={game.players}
+			{players}
 			darker={i % 2 == 0}
-			focused={i === game.focusedRoundIndex}
+			focused={i === focusedRoundIndex}
 			onRoundClicked={onRoundEdit}
 		/>
 	{/each}
@@ -28,5 +30,7 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		z-index: 50;
+		max-height: 75dvh;
+		overflow-y: scroll;
 	}
 </style>

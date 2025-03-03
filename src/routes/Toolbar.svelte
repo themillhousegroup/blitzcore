@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type { Game } from '$lib';
-
 	type Props = {
-		existingGame: Game | undefined;
 		onNewGame: () => void;
 		onAddRound: () => void;
 	};
@@ -24,7 +21,8 @@
 
 <style>
 	.toolbar {
-		height: 10%;
+		height: 7dvh;
+		max-height: 7dvh;
 		flex: 0;
 		display: flex;
 		flex-direction: row;

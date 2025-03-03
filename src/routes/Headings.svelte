@@ -1,11 +1,10 @@
 <script lang="ts">
-	import type { Game } from '$lib';
+	import type { Player } from "$lib";
 
 	type Props = {
-		game: Game;
+		players: Array<Player>;
 	};
-	const { game }: Props = $props();
-	const { players } = game;
+	const { players }: Props = $props();
 </script>
 
 <div class="headings">

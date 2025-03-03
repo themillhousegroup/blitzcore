@@ -4,7 +4,6 @@
 		BLITZ_GREEN,
 		BLITZ_RED,
 		BLITZ_YELLOW,
-		type Game,
 		type GameSetup,
 		type OutcomeRound,
 		type Player,
@@ -14,10 +13,10 @@
 	// import NewGamePlayerBox from './NewGamePlayerBox.svelte';
 
 	type Props = {
-		previousGame: Game | undefined;
+		previousPlayers: Array<Player>;
 		onFinished: (newGameSetup: GameSetup) => void;
 	};
-	const { previousGame, onFinished }: Props = $props();
+	const { previousPlayers, onFinished }: Props = $props();
 
 	const DEFAULT_PLAYERS: Array<Player> = [
 		{
@@ -38,42 +37,71 @@
 		}
 	];
 
-	let numberOfPlayers = $state(previousGame?.players.length || DEFAULT_PLAYERS.length);
+	let numberOfPlayers = $state(previousPlayers.length === 0 ? DEFAULT_PLAYERS.length : previousPlayers.length);
 	function setNumberOfPlayers(newNum: number) {
-		console.log(`num players => ${newNum}`);
 		numberOfPlayers = newNum;
+		if (numberOfPlayers > newPlayerArray.length) {
+			newPlayerArray = DEFAULT_PLAYERS;
+			newPlayerArray.forEach((p, i) => {
+				if (i < newNum && previousPlayers.length > 0) {
+					newPlayerArray[i] = previousPlayers[i];
+				}
+			});
+		} 
 	}
-	let newPlayerArray: Array<Player> = $derived(previousGame?.players || DEFAULT_PLAYERS);
+
+	let newPlayerArray: Array<Player> = $state(previousPlayers.length === 0 ? [...DEFAULT_PLAYERS] : [...previousPlayers);
+
+
+	const updatePlayer = (playerIdx: number) => (newPlayerInfo:Player) => {
+		newPlayerArray[playerIdx] = newPlayerInfo;
+	}
+
 
 	function completeSetup() {
-		const newGameSetup = newPlayerArray as unknown as GameSetup;
+		const newGameSetup = newPlayerArray.slice(0, numberOfPlayers) as unknown as GameSetup;
 		onFinished(newGameSetup)
 	}
+
+
+	function numPlayersChanged(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
+		setNumberOfPlayers(parseInt(event.currentTarget.value, 10))
+	}
+
+	let colorsAreUnique:boolean = $state(true)
 </script>
 
 <div class="newgamewindow">
 	<h2>New Game</h2>
 	<div class="numplayers">
-		<button class="numbtn" onclick={() => setNumberOfPlayers(2)} aria-label="Two Players">
-			2 Players
-		</button>
-		<button class="numbtn" onclick={() => setNumberOfPlayers(3)} aria-label="Three Players">
-			3 Players
-		</button>
-		<button class="numbtn" onclick={() => setNumberOfPlayers(4)} aria-label="Four Players">
-			4 Players
-		</button>
+		<label for="numPlayersRange">Number of Players</label>
+		
+		<input name="numPlayersRange" 
+			type="range" 
+			min="2" step="1" max="4" 
+			value={numberOfPlayers} 
+			list="markers"
+			onchange={numPlayersChanged}
+		/>
+		<datalist id="markers">
+			<option value="2" label="2"></option>
+			<option value="3" label="3"></option>
+			<option value="4" label="4"></option>
+		</datalist>
 	</div>
 	<div class="playersbox">
 		{#each { length: numberOfPlayers }, playerIdx}
 			<NewGamePlayerBox 
 				player={newPlayerArray[playerIdx as number]} 
-				onPlayerUpdated={(newPlayerInfo: Player) => newPlayerArray[playerIdx as number] = newPlayerInfo} 
+				onPlayerUpdated={updatePlayer(playerIdx)} 
 			/>
 		{/each}
 	</div>
 
-	<button onclick={completeSetup} aria-label="Start the game"> Start the game </button>
+	<button 
+		onclick={completeSetup} 
+		disabled={!colorsAreUnique}
+		aria-label="Start the game"> Start the game </button>
 </div>
 
 <style>
@@ -97,12 +125,15 @@
 	.numplayers {
 		width: 90%;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-between;
+		align-items: center;
 	}
 
-	button.numbtn {
-		flex: 1;
+	datalist {
+		width: 8em;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	button {
