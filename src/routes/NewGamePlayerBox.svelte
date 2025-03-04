@@ -110,6 +110,10 @@
 		flex-wrap: wrap;
 	}
 
+	label {
+		font-size: smaller;
+	}
+
 	button.color {
 		flex: 1;
 		margin: 2px;
