@@ -29,6 +29,18 @@ export type OutcomeRound = {
 	outcomes: Array<PlayerOutcome>;
 };
 
+export const roundsHaveValuableContent = (rounds: Array<OutcomeRound>): boolean = {
+	if (rounds.length > 0) {
+		const outcomes = round[0].outcomes;
+		const sum = outcomes.reduce((acc, o) => {
+			return acc + o.blitzCardsRemaining + o.cardsPlayed;
+		}, 0);
+		return sum > 0;
+	}
+
+	return false;
+}
+
 export const roundTotal = (outcome: PlayerOutcome): number => {
 	const blitzCards = outcome.blitzCardsRemaining;
 	const playedCards = outcome.cardsPlayed;
