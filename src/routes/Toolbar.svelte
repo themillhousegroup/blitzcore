@@ -4,15 +4,10 @@
 		onAddRound: () => void;
 	};
 	const { onNewGame, onAddRound }: Props = $props();
-	function confirmNewGame() {
-		if (confirm('Are you sure you want to start a new game?')) {
-			onNewGame();
-		}
-	}
 </script>
 
 <div class="toolbar">
-	<button onclick={confirmNewGame} aria-label="Start a new game"> New Game </button>
+	<button onclick={onNewGame} aria-label="Start a new game"> New Game </button>
 
 	<!-- todo: toggle between visual modes here -->
 
