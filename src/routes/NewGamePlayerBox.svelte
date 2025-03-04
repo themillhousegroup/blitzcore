@@ -112,5 +112,6 @@
 
 	button.color {
 		flex: 1;
+		margin: 2px;
 	}
 </style>
