@@ -35,20 +35,21 @@
 			name: 'David',
 			color: BLITZ_GREEN
 		}
-	];
+	] as const;
 
 	let numberOfPlayers = $state(previousPlayers.length === 0 ? DEFAULT_PLAYERS.length : previousPlayers.length);
-	function setNumberOfPlayers(newNum: number) {
-		numberOfPlayers = newNum;
-		if (numberOfPlayers > newPlayerArray.length) {
-			newPlayerArray = DEFAULT_PLAYERS;
-			newPlayerArray.forEach((p, i) => {
-				if (i < newNum && previousPlayers.length > 0) {
-					newPlayerArray[i] = previousPlayers[i];
-				}
-			});
-		} 
-	}
+
+	  function setNumberOfPlayers(newNum: number) {
+			numberOfPlayers = newNum;
+			if (numberOfPlayers > newPlayerArray.length) {
+				newPlayerArray = DEFAULT_PLAYERS.slice(0, newNum);
+				previousPlayers.forEach((p, i) => {
+					if (i < newNum && previousPlayers.length > 0) {
+						newPlayerArray[i] = previousPlayers[i];
+					}
+				});
+			} 
+		}
 
 	let newPlayerArray: Array<Player> = $state(previousPlayers.length === 0 ? [...DEFAULT_PLAYERS] : [...previousPlayers]);
 
