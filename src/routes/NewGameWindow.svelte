@@ -115,7 +115,7 @@
 		border: 2px solid darkgray;
 		border-radius: 8px;
 		background-color: white;
-		height: 96dvh;
+		height: 94dvh;
 		width: 90vw;
 		display: flex;
 		flex-direction: column;
@@ -150,6 +150,6 @@
 		gap: 1dvh;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 86dvh;
+		height: 74dvh;
 	}
 </style>

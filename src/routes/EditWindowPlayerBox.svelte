@@ -40,7 +40,7 @@
 	style={`background-color: ${player.color.lowIntensity}; border-color: ${player.color.highIntensity};`}
 >
 	<div class="inforow">
-		<h2 style={`border-bottom: 1px solid ${player.color.highIntensity}; width: 90%`}>
+		<h2 class="undername" style:border-bottom-color={player.color.highIntensity}>
 			{player.name}
 		</h2>
 		<h1>{roundTotal(outcome)}</h1>
@@ -76,11 +76,6 @@
 	</div>
 </div>
 
-<!-- <button onclick={onFinished} aria-label="Finished editing">
-		Done
-	</button> -->
-<!-- </div> -->
-
 <style>
 	.playerbox {
 		flex: 1;
@@ -88,6 +83,12 @@
 		border: 1px solid pink;
 		border-radius: 8px;
 		padding: 2px 8px;
+	}
+
+	.undername {
+		width: 90%;
+		border-bottom: 1px solid white;
+		padding-bottom: 0;
 	}
 
 	h1,
@@ -99,6 +100,7 @@
 	h1 {
 		font-size: 1.75em;
 	}
+
 
 	h1,
 	h3 {
@@ -115,12 +117,12 @@
 	.inforow {
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 6px;
+		margin-bottom: 2px;
 	}
 
 	.inforow-editing {
 		flex-direction: column;
 		justify-content: space-between;
-		margin-bottom: 6px;
+		margin-bottom: 2px;
 	}
 </style>

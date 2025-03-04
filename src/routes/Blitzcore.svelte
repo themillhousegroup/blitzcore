@@ -6,16 +6,21 @@
 		type GameSetup,
 		type Player,
 
-		createRound
+		createRound,
+
+		roundsHaveValuableContent
+
 
 	} from '$lib';
 	import EditWindow from './EditWindow.svelte';
 	import NewGameWindow from './NewGameWindow.svelte';
+	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
 
 	let players: Array<Player> = $state([]);
 	let rounds: Array<OutcomeRound> = $state([]);
 	let focusedRoundIndex: number = $state(0);
 
+	let showNewGameConfirmDialog: boolean = $state(false);
 	let showNewGameWindow: boolean = $state(true);
 	let showEditWindowForRound: number = $state(-1);
 
@@ -27,7 +32,11 @@
 	}
 
 	function onNewGame() {
-		showNewGameWindow = true;
+		if (roundsHaveValuableContent(rounds)) {
+			showNewGameConfirmDialog = true;
+		} else {
+			showNewGameWindow = true;
+		}
 	}
 
 	function onNewGameSetupFinished(newGameSetup: GameSetup) {
@@ -48,10 +57,22 @@
 			rounds[roundNumber] = newRound;
 		}
 	}
+
+	function handleNewGameConfirm(proceedWithNewGame: boolean) {
+		showNewGameConfirmDialog = false;
+		showNewGameWindow = proceedWithNewGame;
+	}
 </script>
 
 <div class="blitzcore">
 	<Main {players} {focusedRoundIndex} {rounds} onRoundEdit={startEditing} />
+
+	{#if showNewGameConfirmDialog}
+	<div class="matte">
+		<NewGameConfirmDialog onDismissed={handleNewGameConfirm} />
+	</div>
+{/if}
+
 	{#if showNewGameWindow}
 		<div class="matte">
 			<NewGameWindow previousPlayers={players} onFinished={onNewGameSetupFinished} />
@@ -85,8 +106,8 @@
 	.matte {
 		position: absolute;
 		z-index: 75;
-		width: 100vw;
-		height: 100vh;
+		width: 100dvw;
+		height: 100dvh;
 		background-color: #202020cc;
 	}
 </style>

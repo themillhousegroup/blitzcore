@@ -77,6 +77,6 @@
 		gap: 1dvh;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 86vh;
+		height: 75vh;
 	}
 </style>

@@ -3,9 +3,6 @@
 A scoring app for Dutch Blitz, in Svelte/SvelteKit
 
 ## TODO
-- Size of New Player window on mobile
-- Replace browser-level confirm dialog with matte+custom dialog
-- Fix 2->3, 3->4 player crash
 - Subtle animation on row expansion / player focus in edit window
 - Store player data in cookie for persistence
 - Toggle to go between normal view and running-total view

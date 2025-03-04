@@ -30,14 +30,5 @@
 
 	.toolbar button {
 		flex: 1;
-		padding: 4px;
-		border: 1px;
-		border-radius: 8px;
-		margin: 4px;
-		background-color: grey;
-	}
-
-	.toolbar button:hover {
-		background-color: var(--color-bg-1);
 	}
 </style>
