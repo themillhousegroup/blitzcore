@@ -112,3 +112,36 @@ export const createRound = (numPlayers: number): OutcomeRound => {
 		outcomes
 	};
 };
+const LOCALSTORAGE_KEY = "blitzcorePlayers";
+
+export const storeGameSetup = (setup: GameSetup): void => {
+	Window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
+};
+
+	const DEFAULT_PLAYERS: Array<Player> = [
+		{
+			name: 'Alice',
+			color: BLITZ_BLUE
+		},
+		{
+			name: 'Bob',
+			color: BLITZ_RED
+		},
+		{
+			name: 'Charlie',
+			color: BLITZ_YELLOW
+		},
+		{
+			name: 'David',
+			color: BLITZ_GREEN
+		}
+	] as const;
+
+export const retrieveGameSetup = (): GameSetup => {
+	const existing = Window.localStorage.getItem(LOCALSTORAGE_KEY);
+	if (existing) {
+		return JSON.parse(existing) as GameSetup;
+	} else {
+		return DEFAULT_PLAYERS as GameSetup;
+	}
+};
