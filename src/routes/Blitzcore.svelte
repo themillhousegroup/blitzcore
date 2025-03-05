@@ -71,19 +71,20 @@
 
 	{#if showNewGameConfirmDialog}
 	<div class="matte">
-		<NewGameConfirmDialog onDismissed={handleNewGameConfirm} />
+		<NewGameConfirmDialog transition:fade onDismissed={handleNewGameConfirm} />
 	</div>
 {/if}
 
 	{#if showNewGameWindow}
 		<div class="matte">
-			<NewGameWindow previousPlayers={players} onFinished={onNewGameSetupFinished} />
+			<NewGameWindow transition:fadepreviousPlayers={players} onFinished={onNewGameSetupFinished} />
 		</div>
 	{/if}
 
 	{#if showEditWindowForRound >= 0}
 		<div class="matte">
 			<EditWindow
+				transition:fade
 				round={rounds[showEditWindowForRound]}
 				roundNumber={showEditWindowForRound}
 				{players}
