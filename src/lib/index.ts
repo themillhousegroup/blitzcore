@@ -115,7 +115,7 @@ export const createRound = (numPlayers: number): OutcomeRound => {
 const LOCALSTORAGE_KEY = "blitzcorePlayers";
 
 export const storeGameSetup = (setup: GameSetup): void => {
-	Window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
+	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
 };
 
 export const DEFAULT_PLAYERS: Array<Player> = [
@@ -138,7 +138,7 @@ export const DEFAULT_PLAYERS: Array<Player> = [
 	] as const;
 
 export const retrieveGameSetup = (): GameSetup => {
-	const existing = Window.localStorage.getItem(LOCALSTORAGE_KEY);
+	const existing = window.localStorage.getItem(LOCALSTORAGE_KEY);
 	if (existing) {
 		return JSON.parse(existing) as GameSetup;
 	} else {
