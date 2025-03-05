@@ -118,7 +118,7 @@ export const storeGameSetup = (setup: GameSetup): void => {
 	Window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
 };
 
-	const DEFAULT_PLAYERS: Array<Player> = [
+export const DEFAULT_PLAYERS: Array<Player> = [
 		{
 			name: 'Alice',
 			color: BLITZ_BLUE
