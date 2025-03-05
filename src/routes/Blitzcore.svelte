@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import Toolbar from './Toolbar.svelte';
 	import Main from './Main.svelte';
 	import {
@@ -16,7 +17,7 @@
 	import NewGameWindow from './NewGameWindow.svelte';
 	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
 
-	let players: Array<Player> = $state(retrieveGameSetup());
+	let players: Array<Player> = $state(browser ? retrieveGameSetup() : []);
 	let rounds: Array<OutcomeRound> = $state([]);
 	let focusedRoundIndex: number = $state(0);
 
