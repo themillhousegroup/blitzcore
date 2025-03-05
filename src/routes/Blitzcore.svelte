@@ -5,9 +5,9 @@
 		type OutcomeRound,
 		type GameSetup,
 		type Player,
-
+		storeGameSetup,
+		retrieveGameSetup,
 		createRound,
-
 		roundsHaveValuableContent
 
 
@@ -16,7 +16,7 @@
 	import NewGameWindow from './NewGameWindow.svelte';
 	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
 
-	let players: Array<Player> = $state([]);
+	let players: Array<Player> = $state(retrieveGameSetup());
 	let rounds: Array<OutcomeRound> = $state([]);
 	let focusedRoundIndex: number = $state(0);
 
@@ -44,6 +44,7 @@
 		focusedRoundIndex = 0;
 		players = newGameSetup as unknown as Array<Player>;
 		rounds = [createRound(newGameSetup.length)];
+		storeGameSetup(newGameSetup);
 	}
 
 	function onAddRound() {
