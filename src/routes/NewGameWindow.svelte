@@ -7,10 +7,10 @@
 		type GameSetup,
 		type OutcomeRound,
 		type Player,
-		type PlayerOutcome
+		type PlayerOutcome,
+		DEFAULT_PLAYERS,
 	} from '$lib';
 	import NewGamePlayerBox from './NewGamePlayerBox.svelte';
-	// import NewGamePlayerBox from './NewGamePlayerBox.svelte';
 
 	type Props = {
 		previousPlayers: Array<Player>;
@@ -18,26 +18,7 @@
 	};
 	const { previousPlayers, onFinished }: Props = $props();
 
-	const DEFAULT_PLAYERS: Array<Player> = [
-		{
-			name: 'Alice',
-			color: BLITZ_BLUE
-		},
-		{
-			name: 'Bob',
-			color: BLITZ_RED
-		},
-		{
-			name: 'Charlie',
-			color: BLITZ_YELLOW
-		},
-		{
-			name: 'David',
-			color: BLITZ_GREEN
-		}
-	] as const;
-
-	let numberOfPlayers = $state(previousPlayers.length === 0 ? DEFAULT_PLAYERS.length : previousPlayers.length);
+	let numberOfPlayers = $state(previousPlayers.length);
 
 	  function setNumberOfPlayers(newNum: number) {
 			numberOfPlayers = newNum;
@@ -51,7 +32,7 @@
 			} 
 		}
 
-	let newPlayerArray: Array<Player> = $state(previousPlayers.length === 0 ? [...DEFAULT_PLAYERS] : [...previousPlayers]);
+	let newPlayerArray: Array<Player> = $state([...previousPlayers]);
 
 
 	const updatePlayer = (playerIdx: number) => (newPlayerInfo:Player) => {
