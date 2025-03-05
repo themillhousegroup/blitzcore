@@ -70,19 +70,19 @@
 	<Main {players} {focusedRoundIndex} {rounds} onRoundEdit={startEditing} />
 
 	{#if showNewGameConfirmDialog}
-	<div class="matte" transition:fade>
+	<div class="matte">
 		<NewGameConfirmDialog  onDismissed={handleNewGameConfirm} />
 	</div>
 {/if}
 
 	{#if showNewGameWindow}
-		<div class="matte" transition:fade>
+		<div class="matte">
 			<NewGameWindow previousPlayers={players} onFinished={onNewGameSetupFinished} />
 		</div>
 	{/if}
 
 	{#if showEditWindowForRound >= 0}
-		<div class="matte" transition:fade>
+		<div class="matte">
 			<EditWindow
 				round={rounds[showEditWindowForRound]}
 				roundNumber={showEditWindowForRound}
