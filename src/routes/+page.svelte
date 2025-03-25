@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Blitzcore</title>
 	<meta name="description" content="Dutch Blitz Scoring App" />
 </svelte:head>
 
