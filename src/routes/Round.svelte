@@ -12,7 +12,7 @@
 		onRoundClicked: (roundNumber: number) => void;
 		roundDisplayMode: RoundDisplayMode;
 	};
-	const { roundNumber, round, players, darker, focused, onRoundClicked, roundDisplayMode }: Props = $props();
+	const { roundNumber, round, rounds, players, darker, focused, onRoundClicked, roundDisplayMode }: Props = $props();
 </script>
 
 <div class={`round ${focused ? 'focused' : ''}`} onclickcapture={() => onRoundClicked(roundNumber)}>
