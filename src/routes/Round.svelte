@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { roundTotal, type OutcomeRound, type Player, type RoundDisplayMode } from '$lib';
+	import { roundTotal, playerRunningTotalForRound, type OutcomeRound, type Player, type RoundDisplayMode } from '$lib';
 	import Cell from './Cell.svelte';
 
 	type Props = {
 		roundNumber: number;
 		round: OutcomeRound;
+		rounds: Array<OutcomeRound>;
 		players: Array<Player>;
 		darker: boolean;
 		focused: boolean;
@@ -18,9 +19,13 @@
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? 'LOW' : 'HIGH'} {focused}>
 			<div class="cell-inner">
-				<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
-				<div>{round.outcomes[i].cardsPlayed}</div>
-				<div class="sum">{roundTotal(round.outcomes[i])}</div>
+				{#if roundDisplayMode === 'ROUND_DETAILS'}
+					<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
+					<div>{round.outcomes[i].cardsPlayed}</div>
+					<div class="sum">{roundTotal(round.outcomes[i])}</div>
+				{:else}
+					<div>{playerRunningTotalForRound(i, rounds, roundNumber)}</div>
+				{/if}
 			</div>
 		</Cell>
 	{/each}

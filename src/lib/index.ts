@@ -58,6 +58,11 @@ export const playerTotal = (playerIndex: number, rounds: Array<OutcomeRound>): n
 	return total;
 };
 
+export const playerRunningTotalForRound = (playerIndex: number, rounds: Array<OutcomeRound>, roundNumber: number): number => {
+	const truncatedRounds = rounds.slice(0, roundNumber);
+	return playerTotal(playerIndex, truncatedRounds);
+};
+
 export type ColorMode = 'NORMAL' | 'LOW' | 'HIGH';
 
 export const BLITZ_RED: DutchBlitzColor = {

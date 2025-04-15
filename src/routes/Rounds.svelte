@@ -17,6 +17,7 @@
 		<Round
 			roundNumber={i}
 			{round}
+			{rounds}
 			{players}
 			darker={i % 2 == 0}
 			focused={i === focusedRoundIndex}
