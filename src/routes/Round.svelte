@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { roundTotal, type OutcomeRound, type Player } from '$lib';
+	import { roundTotal, type OutcomeRound, type Player, type RoundDisplayMode } from '$lib';
 	import Cell from './Cell.svelte';
 
 	type Props = {
@@ -9,8 +9,9 @@
 		darker: boolean;
 		focused: boolean;
 		onRoundClicked: (roundNumber: number) => void;
+		roundDisplayMode: RoundDisplayMode;
 	};
-	const { roundNumber, round, players, darker, focused, onRoundClicked }: Props = $props();
+	const { roundNumber, round, players, darker, focused, onRoundClicked, roundDisplayMode }: Props = $props();
 </script>
 
 <div class={`round ${focused ? 'focused' : ''}`} onclickcapture={() => onRoundClicked(roundNumber)}>

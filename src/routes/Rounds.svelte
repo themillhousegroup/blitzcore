@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { OutcomeRound, Player } from '$lib';
+	import type { OutcomeRound, Player, RoundDisplayMode } from '$lib';
 	import Round from './Round.svelte';
 
 	type Props = {
@@ -7,8 +7,9 @@
 		rounds: Array<OutcomeRound>;
 		focusedRoundIndex: number;
 		onRoundEdit: (roundNumber: number) => void;
+		roundDisplayMode: RoundDisplayMode;
 	};
-	const { players, rounds, focusedRoundIndex, onRoundEdit }: Props = $props();
+	const { players, rounds, focusedRoundIndex, onRoundEdit, roundDisplayMode }: Props = $props();
 </script>
 
 <div class="rounds">
@@ -20,6 +21,7 @@
 			darker={i % 2 == 0}
 			focused={i === focusedRoundIndex}
 			onRoundClicked={onRoundEdit}
+			{roundDisplayMode}
 		/>
 	{/each}
 </div>

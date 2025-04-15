@@ -1,5 +1,7 @@
 // place files you want to import through the `$lib` alias in this folder.
 
+export type RoundDisplayMode = 'ROUND_DETAILS' | 'TOTALS';
+
 type RGBAQuad = `#${string}`;
 
 export type DutchBlitzColor = {

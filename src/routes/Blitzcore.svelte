@@ -20,6 +20,11 @@
 	let players: Array<Player> = $state(browser ? retrieveGameSetup() : []);
 	let rounds: Array<OutcomeRound> = $state([]);
 	let focusedRoundIndex: number = $state(0);
+	let roundDisplayMode: RoundDisplayMode = $state('ROUND_DETAILS');
+
+	function onToggleDisplayMode() {
+		roundDisplayMode = (roundDisplayMode === 'ROUND_DETAILS' ? 'TOTALS' : 'ROUND_DETAILS');
+	}
 
 	let showNewGameConfirmDialog: boolean = $state(false);
 	let showNewGameWindow: boolean = $state(true);
@@ -67,13 +72,13 @@
 </script>
 
 <div class="blitzcore">
-	<Main {players} {focusedRoundIndex} {rounds} onRoundEdit={startEditing} />
+	<Main {players} {focusedRoundIndex} {rounds} onRoundEdit={startEditing} {roundDisplayMode} />
 
 	{#if showNewGameConfirmDialog}
-	<div class="matte">
-		<NewGameConfirmDialog  onDismissed={handleNewGameConfirm} />
-	</div>
-{/if}
+		<div class="matte">
+			<NewGameConfirmDialog onDismissed={handleNewGameConfirm} />
+		</div>
+	{/if}
 
 	{#if showNewGameWindow}
 		<div class="matte">
@@ -92,7 +97,7 @@
 			/>
 		</div>
 	{/if}
-	<Toolbar {onNewGame} {onAddRound} />
+	<Toolbar {onNewGame} {roundDisplayMode} {onToggleDisplayMode} {onAddRound} />
 </div>
 
 <style>
