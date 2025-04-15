@@ -59,7 +59,7 @@ export const playerTotal = (playerIndex: number, rounds: Array<OutcomeRound>): n
 };
 
 export const playerRunningTotalForRound = (playerIndex: number, rounds: Array<OutcomeRound>, roundNumber: number): number => {
-	const truncatedRounds = rounds.slice(0, roundNumber);
+	const truncatedRounds = rounds.slice(0, roundNumber +1);
 	return playerTotal(playerIndex, truncatedRounds);
 };
 

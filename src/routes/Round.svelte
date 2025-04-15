@@ -18,7 +18,7 @@
 <div class={`round ${focused ? 'focused' : ''}`} onclickcapture={() => onRoundClicked(roundNumber)}>
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? 'LOW' : 'HIGH'} {focused}>
-			<div class="cell-inner">
+			<div class={`cell-inner ${roundDisplayMode}`>
 				{#if roundDisplayMode === 'ROUND_DETAILS'}
 					<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
 					<div>{round.outcomes[i].cardsPlayed}</div>
@@ -55,6 +55,11 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+
+	.cell-inner.TOTALS {
+		justify-content: center;
+	}
+	
 	.card {
 		font-size: 0.75em;
 		color: black;
