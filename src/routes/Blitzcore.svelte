@@ -28,9 +28,11 @@
 	let showNewGameConfirmDialog: boolean = $state(false);
 	let showNewGameWindow: boolean = $state(true);
 	let showEditWindowForRound: number = $state(-1);
+	let editWindowInitiallyFocusedPlayerIndex: number = $state(-1);
 
-	function startEditing(roundNumber: number, player: Player) {
+	function startEditing(roundNumber: number, playerIndex: number) {
 		showEditWindowForRound = roundNumber;
+		editWindowInitiallyFocusedPlayerIndex = playerIndex;
 	}
 	function stopEditing() {
 		showEditWindowForRound = -1;
@@ -90,6 +92,7 @@
 			<EditWindow
 				round={rounds[showEditWindowForRound]}
 				roundNumber={showEditWindowForRound}
+				initiallyFocusedPlayerIndex={editWindowInitiallyFocusedPlayerIndex}
 				{players}
 				onRoundUpdate={roundUpdated}
 				onFinished={stopEditing}

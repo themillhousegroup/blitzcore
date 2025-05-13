@@ -18,7 +18,7 @@
 <div class={`round ${focused ? 'focused' : ''}`}>
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? 'LOW' : 'HIGH'} {focused}>
-			<div class={`cell-inner ${roundDisplayMode}`} onclickcapture={() => onCellClicked(roundNumber, player)}>
+			<div class={`cell-inner ${roundDisplayMode}`} onclickcapture={() => onCellClicked(roundNumber, i)}>
 				{#if roundDisplayMode === 'ROUND_DETAILS'}
 					<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
 					<div>{round.outcomes[i].cardsPlayed}</div>

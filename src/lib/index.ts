@@ -16,7 +16,7 @@ export type Player = {
 	color: DutchBlitzColor;
 };
 
-export type EditCallback = (roundNumber: number, player: Player) => void;
+export type EditCallback = (roundNumber: number, playerIndex: number) => void;
 
 type TwoPlayerGame = readonly [Player, Player];
 type ThreePlayerGame = readonly [Player, Player, Player];

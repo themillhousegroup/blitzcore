@@ -5,13 +5,14 @@
 	type Props = {
 		round: OutcomeRound;
 		roundNumber: number;
+		initiallyFocusedPlayerIndex: number;
 		players: Array<Player>;
 		onRoundUpdate: (roundNumber: number, newRound: OutcomeRound) => void;
 		onFinished: () => void;
 	};
 	const { round, roundNumber, players, onRoundUpdate, onFinished }: Props = $props();
 
-	let playerBoxBeingEdited = $state(-1);
+	let playerBoxBeingEdited = $state(initiallyFocusedPlayerIndex);
 
 	function replacePlayerOutcome(i: number, newOutcome: PlayerOutcome) {
 		const before = round.outcomes.slice(0, i);
