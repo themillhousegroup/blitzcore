@@ -4,23 +4,8 @@ A scoring app for Dutch Blitz, in Svelte/SvelteKit
 
 ## TODO
 - Subtle animation on row expansion / player focus in edit window
-- Store player data in cookie for persistence
-- Toggle to go between normal view and running-total view
 - Improve rendering of individual cells in round view
-
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
+- Larger grand total row
 
 ## Developing
 

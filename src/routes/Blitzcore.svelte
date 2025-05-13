@@ -10,8 +10,7 @@
 		retrieveGameSetup,
 		createRound,
 		roundsHaveValuableContent
-
-
+		EditCallback
 	} from '$lib';
 	import EditWindow from './EditWindow.svelte';
 	import NewGameWindow from './NewGameWindow.svelte';
@@ -30,7 +29,7 @@
 	let showNewGameWindow: boolean = $state(true);
 	let showEditWindowForRound: number = $state(-1);
 
-	function startEditing(roundNumber: number) {
+	function startEditing(roundNumber: number, player: Player) {
 		showEditWindowForRound = roundNumber;
 	}
 	function stopEditing() {
@@ -72,7 +71,7 @@
 </script>
 
 <div class="blitzcore">
-	<Main {players} {focusedRoundIndex} {rounds} onRoundEdit={startEditing} {roundDisplayMode} />
+	<Main {players} {focusedRoundIndex} {rounds} onCellClicked={startEditing} {roundDisplayMode} />
 
 	{#if showNewGameConfirmDialog}
 		<div class="matte">

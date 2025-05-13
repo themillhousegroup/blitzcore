@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { roundTotal, playerRunningTotalForRound, type OutcomeRound, type Player, type RoundDisplayMode } from '$lib';
+	import { roundTotal, playerRunningTotalForRound, type OutcomeRound, type Player, type RoundDisplayMode, type EditCallback } from '$lib';
 	import Cell from './Cell.svelte';
 
 	type Props = {
@@ -9,16 +9,16 @@
 		players: Array<Player>;
 		darker: boolean;
 		focused: boolean;
-		onRoundClicked: (roundNumber: number) => void;
+		onCellClicked: EditCallback;
 		roundDisplayMode: RoundDisplayMode;
 	};
-	const { roundNumber, round, rounds, players, darker, focused, onRoundClicked, roundDisplayMode }: Props = $props();
+	const { roundNumber, round, rounds, players, darker, focused, onCellClicked, roundDisplayMode }: Props = $props();
 </script>
 
-<div class={`round ${focused ? 'focused' : ''}`} onclickcapture={() => onRoundClicked(roundNumber)}>
+<div class={`round ${focused ? 'focused' : ''}`}>
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? 'LOW' : 'HIGH'} {focused}>
-			<div class={`cell-inner ${roundDisplayMode}`}>
+			<div class={`cell-inner ${roundDisplayMode}`} onclickcapture={() => onCellClicked(roundNumber, player)}>
 				{#if roundDisplayMode === 'ROUND_DETAILS'}
 					<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
 					<div>{round.outcomes[i].cardsPlayed}</div>

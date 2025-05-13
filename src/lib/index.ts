@@ -16,6 +16,8 @@ export type Player = {
 	color: DutchBlitzColor;
 };
 
+export type EditCallback = (roundNumber: number, player: Player) => void;
+
 type TwoPlayerGame = readonly [Player, Player];
 type ThreePlayerGame = readonly [Player, Player, Player];
 type FourPlayerGame = readonly [Player, Player, Player, Player];
@@ -149,6 +151,6 @@ export const retrieveGameSetup = (): GameSetup => {
 	if (existing) {
 		return JSON.parse(existing) as GameSetup;
 	} else {
-		return DEFAULT_PLAYERS as GameSetup;
+		return DEFAULT_PLAYERS as unknown as GameSetup;
 	}
 };

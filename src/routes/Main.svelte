@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Player, OutcomeRound, RoundDisplayMode } from '$lib';
+	import type { Player, OutcomeRound, RoundDisplayMode, EditCallback } from '$lib';
 	import Headings from './Headings.svelte';
 	import Rounds from './Rounds.svelte';
 	import Totals from './Totals.svelte';
@@ -8,15 +8,15 @@
 		players: Array<Player>;
 		rounds: Array<OutcomeRound>;
 		focusedRoundIndex: number;
-		onRoundEdit: (roundNumber: number) => void;
+		onCellClicked: EditCallback;
 		roundDisplayMode: RoundDisplayMode;
 	};
-	const { players, rounds, focusedRoundIndex, onRoundEdit, roundDisplayMode }: Props = $props();
+	const { players, rounds, focusedRoundIndex, onCellClicked, roundDisplayMode }: Props = $props();
 </script>
 
 <div class="main">
 	<Headings {players} />
-	<Rounds {rounds} {players} {focusedRoundIndex} {onRoundEdit} {roundDisplayMode} />
+	<Rounds {rounds} {players} {focusedRoundIndex} {onCellClicked} {roundDisplayMode} />
 	<Totals {players} {rounds} />
 </div>
 
