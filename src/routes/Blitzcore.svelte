@@ -9,7 +9,7 @@
 		storeGameSetup,
 		retrieveGameSetup,
 		createRound,
-		roundsHaveValuableContent
+		roundsHaveValuableContent,
 		EditCallback
 	} from '$lib';
 	import EditWindow from './EditWindow.svelte';
