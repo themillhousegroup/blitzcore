@@ -10,7 +10,7 @@
 		onRoundUpdate: (roundNumber: number, newRound: OutcomeRound) => void;
 		onFinished: () => void;
 	};
-	const { round, roundNumber, players, onRoundUpdate, onFinished }: Props = $props();
+	const { round, roundNumber, players, onRoundUpdate, onFinished, initiallyFocusedPlayerIndex }: Props = $props();
 
 	let playerBoxBeingEdited = $state(initiallyFocusedPlayerIndex);
 

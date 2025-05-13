@@ -33,6 +33,7 @@
 	.cell-inner {
 		font-weight: bold;
 		text-align: center;
-		line-height: 2em;
+		line-height: 1.2em;
+		font-size: 1.6em;
 	}
 </style>
