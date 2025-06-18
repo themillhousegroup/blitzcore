@@ -2,11 +2,6 @@
 
 A scoring app for Dutch Blitz, in Svelte/SvelteKit
 
-## TODO
-- Subtle animation on row expansion / player focus in edit window
-- Improve rendering of individual cells in round view
-- Larger grand total row
-
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
