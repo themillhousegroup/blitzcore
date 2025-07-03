@@ -37,13 +37,13 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: stretch;
-		background-color: white;
+		background-color: var(--theme-background-color);
 		gap: 1px;
 	}
 
 	.round.focused {
-		border-top: 2px solid white;
-		border-bottom: 2px solid white;
+		border-top: 2px solid var(--theme-border-color);
+		border-bottom: 2px solid var(--theme-border-color);
 	}
 
 	.cell-inner {
@@ -65,7 +65,7 @@
 		color: black;
 		border-radius: 0.3em;
 		width: 1.3em;
-		border: 1px solid white;
+		border: 1px solid var(--theme-border-color);
 
 		margin: 0.1em;
 		line-height: 1.8em;

@@ -61,7 +61,6 @@
 		flex: 1;
 		border-radius: 4px;
 		padding: 1px;
-		border: 1px solid white;
 		background-color: white;
 	}
 
@@ -81,7 +80,6 @@
 		overflow: hidden;
 		text-align: center;
 		font-weight: 400;
-		color: var(--color-theme-1);
 		font-size: 2.75em;
 	}
 </style>

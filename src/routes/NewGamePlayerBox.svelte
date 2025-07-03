@@ -96,6 +96,7 @@
 
 	.nameinput {
 		border-radius: 4px;
+		color: var(--theme-color);
 	}
 
 	.colorgroup {

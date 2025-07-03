@@ -80,14 +80,14 @@
 	.playerbox {
 		flex: 1;
 		width: 80vw;
-		border: 1px solid pink;
+		border: 1px solid transparent;
 		border-radius: 8px;
 		padding: 2px 8px;
 	}
 
 	.undername {
 		width: 90%;
-		border-bottom: 1px solid white;
+		border-bottom: 1px solid transparent;
 		padding-bottom: 0;
 	}
 

@@ -21,7 +21,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
-		background-color: white;
+		background-color: var(--theme-background-color);
 		gap: 1px;
 	}
 

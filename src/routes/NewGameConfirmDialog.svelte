@@ -29,9 +29,9 @@
 		left: 5vw;
 		z-index: 100;
 		opacity: 1;
-		border: 2px solid darkgray;
+		border: 2px solid var(--theme-border-color);
 		border-radius: 8px;
-		background-color: white;
+		background-color: var(--theme-background-color);
 		height: 42dvh;
 		width: 90vw;
 		display: flex;

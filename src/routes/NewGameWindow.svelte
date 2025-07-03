@@ -1,19 +1,21 @@
 <script lang="ts">
+	import { Sun, Moon } from '@lucide/svelte';
+
 	import {
 		type GameSetup,
 		type Player,
 		DEFAULT_PLAYERS,
 		type SupportedNumPlayers,
-		type SupportedPlayerArray,
-		type TwoPlayerArray,
 	} from '$lib';
+	import { CORE_THEME_NAMES, RadioControl, type ThemeName } from '@themillhousegroup/svelte-common-ui';
 	import NewGamePlayerBox from './NewGamePlayerBox.svelte';
 
 	type Props = {
 		gameSetup: GameSetup;
 		onFinished: (newGameSetup: GameSetup) => void;
+		onThemeNameChanged: (newThemeName: ThemeName) => void; // allows user to experiment
 	};
-	const { gameSetup, onFinished }: Props = $props();
+	const { gameSetup, onFinished, onThemeNameChanged }: Props = $props();
 
 	let numberOfPlayers = $state(gameSetup.numPlayers);
 
@@ -101,10 +103,32 @@
 		{/each}
 	</div>
 
-	<button 
-		onclick={completeSetup} 
-		disabled={!colorsAreUnique}
-		aria-label="Start the game"> Start the game </button>
+	<div class="bottomarea">
+
+		{#snippet light(selected: boolean, style?: string)}
+			<span class={`inner ${selected ? 'selected' : ''}`} {style}>
+				<Sun size="1.25em"/>
+			</span>
+		{/snippet}
+		{#snippet dark(selected: boolean, style?: string)}
+			<span class={`inner ${selected ? 'selected': ''}`} {style}>
+				<Moon size="1.25em" />
+			</span>
+		{/snippet}
+
+		<div class="rcholder">
+		<RadioControl
+			options={CORE_THEME_NAMES}
+			selectedValue={gameSetup.themeName}
+			onValueChanged={onThemeNameChanged}
+			optionLabelSnippets={[light, dark]}
+		/>
+	</div>
+		<button 
+			onclick={completeSetup} 
+			disabled={!colorsAreUnique}
+			aria-label="Start the game"> Start the game </button>
+	</div>
 </div>
 
 <style>
@@ -114,9 +138,9 @@
 		left: 5vw;
 		z-index: 100;
 		opacity: 1;
-		border: 2px solid darkgray;
+		border: 2px solid var(--theme-border-color);
 		border-radius: 8px;
-		background-color: white;
+		background-color: var(--theme-background-color);
 		height: 94dvh;
 		width: 90vw;
 		display: flex;
@@ -153,5 +177,29 @@
 		flex-direction: column;
 		justify-content: space-between;
 		height: 74dvh;
+	}
+
+
+
+	.bottomarea {
+		width: 90%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.bottomarea button {
+		flex: 8;
+	}
+
+	.inner {
+		display: flex;
+		justify-content: center;
+		min-width: 1.5em;
+		padding: 0.25em;
+
+		&.selected {
+			background-color: #00ff0040;
+		}
 	}
 </style>

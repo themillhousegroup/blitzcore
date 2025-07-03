@@ -10,14 +10,13 @@
 		retrieveGameSetup,
 		createRound,
 		roundsHaveValuableContent,
-		type EditCallback,
-
 		type RoundDisplayMode
-
 	} from '$lib';
 	import EditWindow from './EditWindow.svelte';
 	import NewGameWindow from './NewGameWindow.svelte';
 	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
+	import { ThemeProvider, type ThemeName } from '@themillhousegroup/svelte-common-ui';
+	import { ALL_THEMES } from '$lib/theming';
 
 	let gameSetup: GameSetup = $state(retrieveGameSetup(browser));
 	let rounds: Array<OutcomeRound> = $state([]);
@@ -25,7 +24,7 @@
 	let roundDisplayMode: RoundDisplayMode = $state('ROUND_DETAILS');
 
 	function onToggleDisplayMode() {
-		roundDisplayMode = (roundDisplayMode === 'ROUND_DETAILS' ? 'TOTALS' : 'ROUND_DETAILS');
+		roundDisplayMode = roundDisplayMode === 'ROUND_DETAILS' ? 'TOTALS' : 'ROUND_DETAILS';
 	}
 
 	let showNewGameConfirmDialog: boolean = $state(false);
@@ -49,6 +48,10 @@
 		}
 	}
 
+	function onThemeNameChanged(newThemeName: ThemeName) {
+		gameSetup.themeName = newThemeName;
+	}
+
 	function onNewGameSetupFinished(newGameSetup: GameSetup) {
 		showNewGameWindow = false;
 		focusedRoundIndex = 0;
@@ -60,7 +63,7 @@
 	function onAddRound() {
 		if (rounds) {
 			rounds.push(createRound(gameSetup.numPlayers));
-			focusedRoundIndex = rounds.length - 1
+			focusedRoundIndex = rounds.length - 1;
 		}
 	}
 	function roundUpdated(roundNumber: number, newRound: OutcomeRound) {
@@ -75,35 +78,46 @@
 	}
 </script>
 
-<div class="blitzcore">
-	<Main players={gameSetup.players} {focusedRoundIndex} {rounds} onCellClicked={startEditing} {roundDisplayMode} />
-
-	{#if showNewGameConfirmDialog}
-		<div class="matte">
-			<NewGameConfirmDialog onDismissed={handleNewGameConfirm} />
-		</div>
-	{/if}
-
-	{#if showNewGameWindow}
-		<div class="matte">
-			<NewGameWindow {gameSetup} onFinished={onNewGameSetupFinished} />
-		</div>
-	{/if}
-
-	{#if showEditWindowForRound >= 0}
-		<div class="matte">
-			<EditWindow
-				round={rounds[showEditWindowForRound]}
-				roundNumber={showEditWindowForRound}
-				initiallyFocusedPlayerIndex={editWindowInitiallyFocusedPlayerIndex}
+	<ThemeProvider allThemes={ALL_THEMES} themeName={gameSetup.themeName}>
+		<div class="blitzcore">
+		
+			<Main
 				players={gameSetup.players}
-				onRoundUpdate={roundUpdated}
-				onFinished={stopEditing}
+				{focusedRoundIndex}
+				{rounds}
+				onCellClicked={startEditing}
+				{roundDisplayMode}
 			/>
-		</div>
-	{/if}
-	<Toolbar {onNewGame} {roundDisplayMode} {onToggleDisplayMode} {onAddRound} />
-</div>
+
+			{#if showNewGameConfirmDialog}
+				<div class="matte">
+					<NewGameConfirmDialog onDismissed={handleNewGameConfirm} />
+				</div>
+			{/if}
+
+			{#if showNewGameWindow}
+				<div class="matte">
+					<NewGameWindow {gameSetup} onFinished={onNewGameSetupFinished} {onThemeNameChanged}/>
+				</div>
+			{/if}
+
+			{#if showEditWindowForRound >= 0}
+				<div class="matte">
+					<EditWindow
+						round={rounds[showEditWindowForRound]}
+						roundNumber={showEditWindowForRound}
+						initiallyFocusedPlayerIndex={editWindowInitiallyFocusedPlayerIndex}
+						players={gameSetup.players}
+						onRoundUpdate={roundUpdated}
+						onFinished={stopEditing}
+					/>
+				</div>
+			{/if}
+			<Toolbar {onNewGame} {roundDisplayMode} {onToggleDisplayMode} {onAddRound} />
+		
+	</div>
+	
+	</ThemeProvider>
 
 <style>
 	.blitzcore {

@@ -25,8 +25,8 @@
 		align-items: stretch;
 		gap: 1px;
 		z-index: 50;
-		border-top: 2px solid darkgray;
-		border-bottom: 2px solid darkgray;
+		border-top: 2px solid var(--theme-border-color);
+		border-bottom: 2px solid var(--theme-border-color);
 	}
 
 	.cell-inner {
