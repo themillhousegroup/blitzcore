@@ -15,7 +15,7 @@
 	import EditWindow from './EditWindow.svelte';
 	import NewGameWindow from './NewGameWindow.svelte';
 	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
-	import { ThemeProvider, type ThemeName } from '@themillhousegroup/svelte-common-ui';
+	import { ModalMatte, ThemeProvider, type ThemeName } from '@themillhousegroup/svelte-common-ui';
 	import { ALL_THEMES } from '$lib/theming';
 
 	let gameSetup: GameSetup = $state(retrieveGameSetup(browser));
@@ -90,19 +90,19 @@
 			/>
 
 			{#if showNewGameConfirmDialog}
-				<div class="matte">
+				<ModalMatte onMatteClicked={() => handleNewGameConfirm(false)}>
 					<NewGameConfirmDialog onDismissed={handleNewGameConfirm} />
-				</div>
+				</ModalMatte>
 			{/if}
 
 			{#if showNewGameWindow}
-				<div class="matte">
+				<ModalMatte onMatteClicked={() => showNewGameWindow = false }>
 					<NewGameWindow {gameSetup} onFinished={onNewGameSetupFinished} {onThemeNameChanged}/>
-				</div>
+				</ModalMatte>
 			{/if}
 
 			{#if showEditWindowForRound >= 0}
-				<div class="matte">
+				<ModalMatte onMatteClicked={stopEditing}>
 					<EditWindow
 						round={rounds[showEditWindowForRound]}
 						roundNumber={showEditWindowForRound}
@@ -111,7 +111,7 @@
 						onRoundUpdate={roundUpdated}
 						onFinished={stopEditing}
 					/>
-				</div>
+				</ModalMatte>
 			{/if}
 			<Toolbar {onNewGame} {roundDisplayMode} {onToggleDisplayMode} {onAddRound} />
 		
@@ -127,13 +127,5 @@
 		justify-content: space-between;
 		width: 100dvw;
 		height: 100dvh;
-	}
-
-	.matte {
-		position: absolute;
-		z-index: 75;
-		width: 100dvw;
-		height: 100dvh;
-		background-color: #202020cc;
 	}
 </style>
