@@ -7,7 +7,7 @@
 		DEFAULT_PLAYERS,
 		type SupportedNumPlayers,
 	} from '$lib';
-	import { CORE_THEME_NAMES, RadioControl, type ThemeName } from '@themillhousegroup/svelte-common-ui';
+	import { CORE_THEME_NAMES, RadioControl, SliderControl, type ThemeName } from '@themillhousegroup/svelte-common-ui';
 	import NewGamePlayerBox from './NewGamePlayerBox.svelte';
 
 	type Props = {
@@ -68,31 +68,19 @@
 
 	}
 
-
-	function numPlayersChanged(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
-		setNumberOfPlayers(parseInt(event.currentTarget.value, 10) as SupportedNumPlayers)
-	}
-
 	let colorsAreUnique:boolean = $state(true)
 </script>
 
 <div class="newgamewindow">
 	<h2>New Game</h2>
 	<div class="numplayers">
-		<label for="numPlayersRange">Number of Players</label>
-		
-		<input name="numPlayersRange" 
-			type="range" 
-			min="2" step="1" max="4" 
-			value={numberOfPlayers} 
-			list="markers"
-			onchange={numPlayersChanged}
+
+		<SliderControl
+			label='Number of Players'
+			options={[2,3,4]}
+			selectedValue={numberOfPlayers} 
+			onValueChanged={setNumberOfPlayers}
 		/>
-		<datalist id="markers">
-			<option value="2" label="2"></option>
-			<option value="3" label="3"></option>
-			<option value="4" label="4"></option>
-		</datalist>
 	</div>
 	<div class="playersbox">
 		{#each { length: numberOfPlayers }, playerIdx}
@@ -155,12 +143,6 @@
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	datalist {
-		width: 8em;
-		display: flex;
-		justify-content: space-between;
 	}
 
 	button {
