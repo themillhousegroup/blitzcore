@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Player } from "$lib";
+	import type { SupportedPlayerArray } from "$lib";
 
 	type Props = {
-		players: Array<Player>;
+		players: SupportedPlayerArray;
 	};
 	const { players }: Props = $props();
 </script>

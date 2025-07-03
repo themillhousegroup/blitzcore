@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Player, OutcomeRound, RoundDisplayMode, EditCallback } from '$lib';
+	import type { Player, OutcomeRound, RoundDisplayMode, EditCallback, SupportedPlayerArray } from '$lib';
 	import Headings from './Headings.svelte';
 	import Rounds from './Rounds.svelte';
 	import Totals from './Totals.svelte';
 
 	type Props = {
-		players: Array<Player>;
+		players: SupportedPlayerArray;
 		rounds: Array<OutcomeRound>;
 		focusedRoundIndex: number;
 		onCellClicked: EditCallback;

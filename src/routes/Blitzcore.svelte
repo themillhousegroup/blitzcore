@@ -10,13 +10,16 @@
 		retrieveGameSetup,
 		createRound,
 		roundsHaveValuableContent,
-		EditCallback
+		type EditCallback,
+
+		type RoundDisplayMode
+
 	} from '$lib';
 	import EditWindow from './EditWindow.svelte';
 	import NewGameWindow from './NewGameWindow.svelte';
 	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
 
-	let players: Array<Player> = $state(browser ? retrieveGameSetup() : []);
+	let gameSetup: GameSetup = $state(retrieveGameSetup(browser));
 	let rounds: Array<OutcomeRound> = $state([]);
 	let focusedRoundIndex: number = $state(0);
 	let roundDisplayMode: RoundDisplayMode = $state('ROUND_DETAILS');
@@ -49,14 +52,14 @@
 	function onNewGameSetupFinished(newGameSetup: GameSetup) {
 		showNewGameWindow = false;
 		focusedRoundIndex = 0;
-		players = newGameSetup as unknown as Array<Player>;
-		rounds = [createRound(newGameSetup.length)];
+		gameSetup = newGameSetup;
+		rounds = [createRound(newGameSetup.numPlayers)];
 		storeGameSetup(newGameSetup);
 	}
 
 	function onAddRound() {
 		if (rounds) {
-			rounds.push(createRound(players.length));
+			rounds.push(createRound(gameSetup.numPlayers));
 			focusedRoundIndex = rounds.length - 1
 		}
 	}
@@ -73,7 +76,7 @@
 </script>
 
 <div class="blitzcore">
-	<Main {players} {focusedRoundIndex} {rounds} onCellClicked={startEditing} {roundDisplayMode} />
+	<Main players={gameSetup.players} {focusedRoundIndex} {rounds} onCellClicked={startEditing} {roundDisplayMode} />
 
 	{#if showNewGameConfirmDialog}
 		<div class="matte">
@@ -83,7 +86,7 @@
 
 	{#if showNewGameWindow}
 		<div class="matte">
-			<NewGameWindow previousPlayers={players} onFinished={onNewGameSetupFinished} />
+			<NewGameWindow {gameSetup} onFinished={onNewGameSetupFinished} />
 		</div>
 	{/if}
 
@@ -93,7 +96,7 @@
 				round={rounds[showEditWindowForRound]}
 				roundNumber={showEditWindowForRound}
 				initiallyFocusedPlayerIndex={editWindowInitiallyFocusedPlayerIndex}
-				{players}
+				players={gameSetup.players}
 				onRoundUpdate={roundUpdated}
 				onFinished={stopEditing}
 			/>

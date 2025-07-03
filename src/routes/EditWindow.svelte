@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { OutcomeRound, Player, PlayerOutcome } from '$lib';
+	import type { OutcomeRound, Player, PlayerOutcome, SupportedPlayerArray } from '$lib';
 	import EditWindowPlayerBox from './EditWindowPlayerBox.svelte';
 
 	type Props = {
 		round: OutcomeRound;
 		roundNumber: number;
 		initiallyFocusedPlayerIndex: number;
-		players: Array<Player>;
+		players: SupportedPlayerArray;
 		onRoundUpdate: (roundNumber: number, newRound: OutcomeRound) => void;
 		onFinished: () => void;
 	};

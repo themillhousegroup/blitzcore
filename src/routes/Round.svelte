@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { roundTotal, playerRunningTotalForRound, type OutcomeRound, type Player, type RoundDisplayMode, type EditCallback } from '$lib';
+	import { roundTotal, playerRunningTotalForRound, type OutcomeRound, type Player, type RoundDisplayMode, type EditCallback, type SupportedPlayerArray } from '$lib';
 	import Cell from './Cell.svelte';
 
 	type Props = {
 		roundNumber: number;
 		round: OutcomeRound;
 		rounds: Array<OutcomeRound>;
-		players: Array<Player>;
+		players: SupportedPlayerArray;
 		darker: boolean;
 		focused: boolean;
 		onCellClicked: EditCallback;

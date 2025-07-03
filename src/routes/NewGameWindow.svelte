@@ -1,38 +1,35 @@
 <script lang="ts">
 	import {
-		BLITZ_BLUE,
-		BLITZ_GREEN,
-		BLITZ_RED,
-		BLITZ_YELLOW,
 		type GameSetup,
-		type OutcomeRound,
 		type Player,
-		type PlayerOutcome,
 		DEFAULT_PLAYERS,
+		type SupportedNumPlayers,
+		type SupportedPlayerArray,
+		type TwoPlayerArray,
 	} from '$lib';
 	import NewGamePlayerBox from './NewGamePlayerBox.svelte';
 
 	type Props = {
-		previousPlayers: Array<Player>;
+		gameSetup: GameSetup;
 		onFinished: (newGameSetup: GameSetup) => void;
 	};
-	const { previousPlayers, onFinished }: Props = $props();
+	const { gameSetup, onFinished }: Props = $props();
 
-	let numberOfPlayers = $state(previousPlayers.length);
+	let numberOfPlayers = $state(gameSetup.numPlayers);
 
-	  function setNumberOfPlayers(newNum: number) {
-			numberOfPlayers = newNum;
-			if (numberOfPlayers > newPlayerArray.length) {
-				newPlayerArray = DEFAULT_PLAYERS.slice(0, newNum);
-				previousPlayers.forEach((p, i) => {
-					if (i < newNum && previousPlayers.length > 0) {
-						newPlayerArray[i] = previousPlayers[i];
-					}
-				});
-			} 
-		}
+	const setNumberOfPlayers = (newNum: SupportedNumPlayers) => {
+		numberOfPlayers = newNum;
+		if (numberOfPlayers > newPlayerArray.length) {
+			newPlayerArray = DEFAULT_PLAYERS.slice(0, newNum);
+			gameSetup.players.forEach((p, i) => {
+				if (i < newNum && gameSetup.players.length > 0) {
+					newPlayerArray[i] = gameSetup.players[i];
+				}
+			});
+		} 
+	}
 
-	let newPlayerArray: Array<Player> = $state([...previousPlayers]);
+	let newPlayerArray: Array<Player> = $state([...gameSetup.players]);
 
 
 	const updatePlayer = (playerIdx: number) => (newPlayerInfo:Player) => {
@@ -40,14 +37,38 @@
 	}
 
 
-	function completeSetup() {
-		const newGameSetup = newPlayerArray.slice(0, numberOfPlayers) as unknown as GameSetup;
-		onFinished(newGameSetup)
+	const completeSetup = () => {
+		// Ultimate type-safety...
+		switch (numberOfPlayers) {
+			case 2:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 2,
+					players: [newPlayerArray[0], newPlayerArray[1]]
+				});
+				break;
+			case 3:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 3,
+					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2]]
+				});
+				break;
+			default:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 4,
+					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3]]
+				});
+				break;
+		}		
+
+
 	}
 
 
 	function numPlayersChanged(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
-		setNumberOfPlayers(parseInt(event.currentTarget.value, 10))
+		setNumberOfPlayers(parseInt(event.currentTarget.value, 10) as SupportedNumPlayers)
 	}
 
 	let colorsAreUnique:boolean = $state(true)

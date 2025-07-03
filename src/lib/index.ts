@@ -1,5 +1,7 @@
 // place files you want to import through the `$lib` alias in this folder.
 
+import { CORE_THEME_NAMES, type ThemeName } from "@themillhousegroup/svelte-common-ui";
+
 export type RoundDisplayMode = 'ROUND_DETAILS' | 'TOTALS';
 
 type RGBAQuad = `#${string}`;
@@ -18,9 +20,31 @@ export type Player = {
 
 export type EditCallback = (roundNumber: number, playerIndex: number) => void;
 
-type TwoPlayerGame = readonly [Player, Player];
-type ThreePlayerGame = readonly [Player, Player, Player];
-type FourPlayerGame = readonly [Player, Player, Player, Player];
+type CoreGameSetup = {
+	themeName: ThemeName;
+}
+
+export type SupportedNumPlayers = 2 | 3 | 4;
+
+export type TwoPlayerArray = readonly [Player, Player];
+export type ThreePlayerArray = readonly [Player, Player, Player];
+export type FourPlayerArray = readonly [Player, Player, Player, Player];
+
+export type SupportedPlayerArray = TwoPlayerArray | ThreePlayerArray | FourPlayerArray;
+
+type TwoPlayerGame = CoreGameSetup & {
+	numPlayers: 2;
+	players: TwoPlayerArray;
+}
+type ThreePlayerGame = CoreGameSetup & {
+	numPlayers: 3;
+	players: ThreePlayerArray;
+}
+type FourPlayerGame = CoreGameSetup & {
+	numPlayers: 4;
+	players: FourPlayerArray;
+}
+	
 
 export type GameSetup = TwoPlayerGame | ThreePlayerGame | FourPlayerGame;
 
@@ -121,13 +145,13 @@ export const createRound = (numPlayers: number): OutcomeRound => {
 		outcomes
 	};
 };
-const LOCALSTORAGE_KEY = "blitzcorePlayers";
+const LOCALSTORAGE_KEY = "blitzcoreGameSetup";
 
 export const storeGameSetup = (setup: GameSetup): void => {
 	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
 };
 
-export const DEFAULT_PLAYERS: Array<Player> = [
+export const DEFAULT_PLAYERS: [Player, Player, Player, Player] = [
 		{
 			name: 'Alice',
 			color: BLITZ_BLUE
@@ -146,11 +170,17 @@ export const DEFAULT_PLAYERS: Array<Player> = [
 		}
 	] as const;
 
-export const retrieveGameSetup = (): GameSetup => {
-	const existing = window.localStorage.getItem(LOCALSTORAGE_KEY);
-	if (existing) {
-		return JSON.parse(existing) as GameSetup;
-	} else {
-		return DEFAULT_PLAYERS as unknown as GameSetup;
+export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {
+	if (isBrowser) {
+		const existing = window.localStorage.getItem(LOCALSTORAGE_KEY);
+		if (existing) {
+			return JSON.parse(existing) as GameSetup;
+		}
+	}
+
+	return {
+		themeName: CORE_THEME_NAMES[0],
+		numPlayers: 4,
+		players: DEFAULT_PLAYERS
 	}
 };

@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { playerTotal, type OutcomeRound, type Player, } from '$lib';
+	import { playerTotal, type OutcomeRound, type SupportedPlayerArray, } from '$lib';
 	import Cell from './Cell.svelte';
-	import Round from './Round.svelte';
-
+	
 	type Props = {
-		players: Array<Player>;
-			rounds: Array<OutcomeRound>;
+		players: SupportedPlayerArray;
+		rounds: Array<OutcomeRound>;
 	};
 	const { players, rounds }: Props = $props();
 </script>
