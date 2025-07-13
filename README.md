@@ -2,10 +2,17 @@
 
 A scoring app for Dutch Blitz, in Svelte/SvelteKit
 
+## Features
+
+- Supports 2-4 players
+- Automatic score [re-]calculation
+- Game-specific "just enough" UI
+- Light/Dark mode
+
 ## Still Todo
 
-Support up to 8 players
-Reminder to use 5 Wood Piles in 2p mode
+- Support up to 8 players
+- Reminder to use 5 Wood Piles in 2p mode
 
 
 ## Developing
