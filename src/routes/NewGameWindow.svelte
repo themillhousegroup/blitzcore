@@ -89,6 +89,12 @@
 				onPlayerUpdated={updatePlayer(playerIdx)} 
 			/>
 		{/each}
+                {#if numberOfPlayers === 2}
+                  <span id="twoplayerwarning">
+                    <strong>Remember</strong> that a two-player game
+                    requires <strong>5</strong> Wood Piles, not 3!
+                  </span>
+                {/if}
 	</div>
 
 	<div class="bottomarea">
