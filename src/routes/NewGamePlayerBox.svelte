@@ -50,7 +50,7 @@
 				style:color={BLITZ_BLUE.normal}
 				style:border-color={BLITZ_BLUE.normal}
 			>
-				Blue
+				B
 			</button>
 			<button
 				class="color"
@@ -58,18 +58,18 @@
 				style:color={BLITZ_RED.normal}
 				style:border-color={BLITZ_RED.normal}
 			>
-				Red
+				R
 			</button>
 			<button
 				class="color"
 				onclick={() => colorClicked(BLITZ_YELLOW)}
 				style:color={BLITZ_YELLOW.normal}
-				style:border-color={BLITZ_YELLOW.normal}>Yellow</button
+				style:border-color={BLITZ_YELLOW.normal}>Y</button
 			>
 			<button class="color" 
 			onclick={() => colorClicked(BLITZ_GREEN)}
 			style:color={BLITZ_GREEN.normal} style:border-color={BLITZ_GREEN.normal}
-				>Green</button
+				>G</button
 			>
 		</div>
 	</div>
@@ -85,6 +85,7 @@
 		padding: 2px 8px;
 		gap: 8px;
 		justify-content: space-between;
+		align-items: center;
 		margin: 0 auto;
 	}
 
