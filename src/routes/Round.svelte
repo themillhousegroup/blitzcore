@@ -13,6 +13,7 @@
 		roundDisplayMode: RoundDisplayMode;
 	};
 	const { roundNumber, round, rounds, players, darker, focused, onCellClicked, roundDisplayMode }: Props = $props();
+	const wideView = $derived(players.length < 5);
 </script>
 
 <div class={`round ${focused ? 'focused' : ''}`}>
@@ -20,8 +21,10 @@
 		<Cell forPlayer={player} colorMode={darker ? 'LOW' : 'HIGH'} {focused}>
 			<div class={`cell-inner ${roundDisplayMode}`} onclickcapture={() => onCellClicked(roundNumber, i)}>
 				{#if roundDisplayMode === 'ROUND_DETAILS'}
-					<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
-					<div>{round.outcomes[i].cardsPlayed}</div>
+					{#if wideView}
+						<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
+						<div>{round.outcomes[i].cardsPlayed}</div>
+					{/if}
 					<div class="sum">{roundTotal(round.outcomes[i])}</div>
 				{:else}
 					<div>{playerRunningTotalForRound(i, rounds, roundNumber)}</div>

@@ -24,7 +24,7 @@ type CoreGameSetup = {
 	themeName: ThemeName;
 }
 
-const SUPPORTED_NUMBER_OF_PLAYERS = [2, 3, 4, 5] as const;
+export const SUPPORTED_NUMBER_OF_PLAYERS = [2, 3, 4, 5] as const;
 export type SupportedNumPlayers = (typeof SUPPORTED_NUMBER_OF_PLAYERS)[number];
 
 export type TwoPlayerArray = readonly [Player, Player];
