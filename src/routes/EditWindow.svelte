@@ -51,14 +51,14 @@
 	.editwindow {
 		position: absolute;
 		top: 2dvh;
-		left: 5vw;
+		left: 5dvw;
 		z-index: 100;
 		opacity: 1;
 		border: 2px solid var(--theme-border-color);
 		border-radius: 8px;
 		background-color: var(--theme-background-color);
 		height: 96dvh;
-		width: 90vw;
+		width: 90dvw;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -66,7 +66,7 @@
 	}
 
 	button {
-		width: 60vw;
+		width: 60dvw;
 	}
 
 	h2 {
@@ -78,6 +78,8 @@
 		gap: 1dvh;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 75vh;
+		max-height: 75dvh
+		height: 75dvh;
+		overflow-y: scroll;
 	}
 </style>

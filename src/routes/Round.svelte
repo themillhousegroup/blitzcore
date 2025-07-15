@@ -19,7 +19,7 @@
 <div class={`round ${focused ? 'focused' : ''}`}>
 	{#each players as player, i}
 		<Cell forPlayer={player} colorMode={darker ? 'LOW' : 'HIGH'} {focused}>
-			<div class={`cell-inner ${roundDisplayMode}`} onclickcapture={() => onCellClicked(roundNumber, i)}>
+			<div class={`cell-inner ${roundDisplayMode} ${wideView ? 'wide' : 'narrow'}`} onclickcapture={() => onCellClicked(roundNumber, i)}>
 				{#if roundDisplayMode === 'ROUND_DETAILS'}
 					{#if wideView}
 						<div class="card">{round.outcomes[i].blitzCardsRemaining}</div>
@@ -54,9 +54,16 @@
 		text-align: center;
 		line-height: 2em;
 		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
+		flex-direction: row;	
 		align-items: center;
+
+		&.wide {
+			justify-content: space-between;
+		}
+
+		&.narrow {
+			justify-content: center;
+		}
 	}
 
 	.cell-inner.TOTALS {
