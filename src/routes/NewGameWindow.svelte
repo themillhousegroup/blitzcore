@@ -92,7 +92,7 @@
                 {#if numberOfPlayers === 2}
                   <div id="twoplayerwarning">
                     <strong>Don't forget</strong> that a two-player game
-                    requires <strong>5</strong> Wood Piles each, not 3!
+                    requires <strong>5</strong> <i>Wood Piles</i> each, not 3!
                   </div>
                 {/if}
 	</div>
@@ -167,9 +167,10 @@
 		height: 74dvh;
 	}
 
-         #twoplayerwarning {
-           padding: 1em;
-         }
+	#twoplayerwarning {
+		width: 80dvw;
+		padding: 1em;
+	}
 
 	.bottomarea {
 		width: 90%;
