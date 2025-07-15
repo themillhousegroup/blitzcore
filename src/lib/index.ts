@@ -24,13 +24,15 @@ type CoreGameSetup = {
 	themeName: ThemeName;
 }
 
-export type SupportedNumPlayers = 2 | 3 | 4;
+const SUPPORTED_NUMBER_OF_PLAYERS = [2, 3, 4, 5] as const;
+export type SupportedNumPlayers = (typeof SUPPORTED_NUMBER_OF_PLAYERS)[number];
 
 export type TwoPlayerArray = readonly [Player, Player];
 export type ThreePlayerArray = readonly [Player, Player, Player];
 export type FourPlayerArray = readonly [Player, Player, Player, Player];
+export type FivePlayerArray = readonly [Player, Player, Player, Player, Player];
 
-export type SupportedPlayerArray = TwoPlayerArray | ThreePlayerArray | FourPlayerArray;
+export type SupportedPlayerArray = TwoPlayerArray | ThreePlayerArray | FourPlayerArray | FivePlayerArray;
 
 type TwoPlayerGame = CoreGameSetup & {
 	numPlayers: 2;
@@ -44,9 +46,13 @@ type FourPlayerGame = CoreGameSetup & {
 	numPlayers: 4;
 	players: FourPlayerArray;
 }
+type FivePlayerGame = CoreGameSetup & {
+	numPlayers: 5;
+	players: FivePlayerArray;
+}
 	
 
-export type GameSetup = TwoPlayerGame | ThreePlayerGame | FourPlayerGame;
+export type GameSetup = TwoPlayerGame | ThreePlayerGame | FourPlayerGame | FivePlayerGame;
 
 export type PlayerOutcome = {
 	blitzCardsRemaining: number;
@@ -151,7 +157,7 @@ export const storeGameSetup = (setup: GameSetup): void => {
 	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
 };
 
-export const DEFAULT_PLAYERS: [Player, Player, Player, Player] = [
+export const DEFAULT_PLAYERS: FivePlayerArray = [
 		{
 			name: 'Alice',
 			color: BLITZ_BLUE
@@ -167,6 +173,10 @@ export const DEFAULT_PLAYERS: [Player, Player, Player, Player] = [
 		{
 			name: 'David',
 			color: BLITZ_GREEN
+		},
+		{
+			name: 'Elise',
+			color: BLITZ_BLUE
 		}
 	] as const;
 
@@ -180,7 +190,7 @@ export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {
 
 	return {
 		themeName: CORE_THEME_NAMES[0],
-		numPlayers: 4,
+		numPlayers: DEFAULT_PLAYERS.length,
 		players: DEFAULT_PLAYERS
 	}
 };

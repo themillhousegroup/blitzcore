@@ -5,6 +5,7 @@
 		type GameSetup,
 		type Player,
 		DEFAULT_PLAYERS,
+		SUPPORTED_NUMBER_OF_PLAYERS,
 		type SupportedNumPlayers,
 	} from '$lib';
 	import { CORE_THEME_NAMES, RadioControl, SliderControl, type ThemeName } from '@themillhousegroup/svelte-common-ui';
@@ -56,19 +57,24 @@
 					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2]]
 				});
 				break;
-			default:
+			case 4:
 				onFinished({
 					themeName: gameSetup.themeName,
 					numPlayers: 4,
 					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3]]
 				});
 				break;
+			default:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 5,
+					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3], newPlayerArray[4]]
+				});
+				break;
 		}		
 
 
 	}
-
-	let colorsAreUnique:boolean = $state(true)
 </script>
 
 <div class="newgamewindow">
@@ -77,7 +83,7 @@
 
 		<SliderControl
 			label='Number of Players'
-			options={[2,3,4]}
+			options={SUPPORTED_NUMBER_OF_PLAYERS}
 			selectedValue={numberOfPlayers} 
 			onValueChanged={setNumberOfPlayers}
 		/>
@@ -89,12 +95,12 @@
 				onPlayerUpdated={updatePlayer(playerIdx)} 
 			/>
 		{/each}
-                {#if numberOfPlayers === 2}
-                  <div id="twoplayerwarning">
-                    <strong>Don't forget</strong> that a two-player game
-                    requires <strong>5</strong> <i>Wood Piles</i> each, not 3!
-                  </div>
-                {/if}
+		{#if numberOfPlayers === 2}
+			<div id="twoplayerwarning">
+			<strong>Don't forget</strong> that a two-player game
+			requires <strong>5</strong> <i>Wood Piles</i> each, not 3!
+			</div>
+		{/if}
 	</div>
 
 	<div class="bottomarea">
@@ -120,7 +126,6 @@
 	</div>
 		<button 
 			onclick={completeSetup} 
-			disabled={!colorsAreUnique}
 			aria-label="Start the game"> Start the game </button>
 	</div>
 </div>
