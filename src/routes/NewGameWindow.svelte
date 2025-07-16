@@ -86,6 +86,7 @@
 			options={SUPPORTED_NUMBER_OF_PLAYERS}
 			selectedValue={numberOfPlayers} 
 			onValueChanged={setNumberOfPlayers}
+			--width={"60%"}
 		/>
 	</div>
 	<div class="playersbox">
