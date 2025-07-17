@@ -33,11 +33,16 @@
 	}
 
 	.heading {
-		width: 9em;
+		width: 50%;
 		height: 4em;
 		line-height: 4em;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	span {
+		/** Let long names overhang the container*/
+		position: absolute;
 	}
 </style>

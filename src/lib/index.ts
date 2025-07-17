@@ -20,19 +20,25 @@ export type Player = {
 
 export type EditCallback = (roundNumber: number, playerIndex: number) => void;
 
+export const SUPPORTED_NUMBER_OF_PLAYERS = [2, 3, 4, 5, 6, 7, 8] as const;
+export type SupportedNumPlayers = (typeof SUPPORTED_NUMBER_OF_PLAYERS)[number];
+
 type CoreGameSetup = {
 	themeName: ThemeName;
+	numPlayers: SupportedNumPlayers
 }
-
-export const SUPPORTED_NUMBER_OF_PLAYERS = [2, 3, 4, 5] as const;
-export type SupportedNumPlayers = (typeof SUPPORTED_NUMBER_OF_PLAYERS)[number];
 
 export type TwoPlayerArray = readonly [Player, Player];
 export type ThreePlayerArray = readonly [Player, Player, Player];
 export type FourPlayerArray = readonly [Player, Player, Player, Player];
 export type FivePlayerArray = readonly [Player, Player, Player, Player, Player];
+export type SixPlayerArray = readonly [Player, Player, Player, Player, Player, Player];
+export type SevenPlayerArray = readonly [Player, Player, Player, Player, Player, Player, Player];
+export type EightPlayerArray = readonly [Player, Player, Player, Player, Player, Player, Player, Player];
 
-export type SupportedPlayerArray = TwoPlayerArray | ThreePlayerArray | FourPlayerArray | FivePlayerArray;
+export type SupportedPlayerArray = 
+	TwoPlayerArray | ThreePlayerArray | FourPlayerArray | 
+	FivePlayerArray | SixPlayerArray | SevenPlayerArray | EightPlayerArray;
 
 type TwoPlayerGame = CoreGameSetup & {
 	numPlayers: 2;
@@ -50,9 +56,24 @@ type FivePlayerGame = CoreGameSetup & {
 	numPlayers: 5;
 	players: FivePlayerArray;
 }
+type SixPlayerGame = CoreGameSetup & {
+	numPlayers: 6;
+	players: SixPlayerArray;
+}
+type SevenPlayerGame = CoreGameSetup & {
+	numPlayers: 7;
+	players: SevenPlayerArray;
+}
+type EightPlayerGame = CoreGameSetup & {
+	numPlayers: 8;
+	players: EightPlayerArray;
+}
 	
 
-export type GameSetup = TwoPlayerGame | ThreePlayerGame | FourPlayerGame | FivePlayerGame;
+export type GameSetup = 
+	TwoPlayerGame | ThreePlayerGame | 
+	FourPlayerGame | FivePlayerGame | 
+	SixPlayerGame | SevenPlayerGame | EightPlayerGame;
 
 export type PlayerOutcome = {
 	blitzCardsRemaining: number;
@@ -157,7 +178,7 @@ export const storeGameSetup = (setup: GameSetup): void => {
 	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
 };
 
-export const DEFAULT_PLAYERS: FivePlayerArray = [
+export const DEFAULT_PLAYERS: EightPlayerArray = [
 		{
 			name: 'Alice',
 			color: BLITZ_BLUE
@@ -177,7 +198,19 @@ export const DEFAULT_PLAYERS: FivePlayerArray = [
 		{
 			name: 'Elise',
 			color: BLITZ_BLUE
-		}
+		},
+		{
+			name: 'Fiona',
+			color: BLITZ_RED
+		},
+		{
+			name: 'Grandma',
+			color: BLITZ_YELLOW
+		},
+		{
+			name: 'Harry',
+			color: BLITZ_GREEN
+		},
 	] as const;
 
 export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {

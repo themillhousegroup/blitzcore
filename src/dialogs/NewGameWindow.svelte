@@ -64,16 +64,35 @@
 					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3]]
 				});
 				break;
-			default:
+			case 5:
 				onFinished({
 					themeName: gameSetup.themeName,
 					numPlayers: 5,
 					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3], newPlayerArray[4]]
 				});
 				break;
+			case 6:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 6,
+					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3], newPlayerArray[4], newPlayerArray[5]]
+				});
+				break;
+			case 7:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 7,
+					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3], newPlayerArray[4], newPlayerArray[5], newPlayerArray[6]]
+				});
+				break;
+			case 8:
+				onFinished({
+					themeName: gameSetup.themeName,
+					numPlayers: 8,
+					players: [newPlayerArray[0], newPlayerArray[1], newPlayerArray[2], newPlayerArray[3], newPlayerArray[4], newPlayerArray[5], newPlayerArray[6], newPlayerArray[7]]
+				});
+				break;
 		}		
-
-
 	}
 </script>
 
