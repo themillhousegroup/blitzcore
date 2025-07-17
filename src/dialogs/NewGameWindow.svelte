@@ -9,7 +9,7 @@
 		type SupportedNumPlayers,
 	} from '$lib';
 	import { CORE_THEME_NAMES, RadioControl, SliderControl, type ThemeName } from '@themillhousegroup/svelte-common-ui';
-	import NewGamePlayerBox from './NewGamePlayerBox.svelte';
+	import NewGamePlayerBox from '../components/NewGamePlayerBox.svelte';
 
 	type Props = {
 		gameSetup: GameSetup;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { playerTotal, type OutcomeRound, type SupportedPlayerArray, } from '$lib';
-	import Cell from './Cell.svelte';
+	import Cell from '../components/Cell.svelte';
 	
 	type Props = {
 		players: SupportedPlayerArray;

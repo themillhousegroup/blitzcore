@@ -52,6 +52,6 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.513.0",
-		"@themillhousegroup/svelte-common-ui": "^0.0.7"
+		"@themillhousegroup/svelte-common-ui": "^0.0.9"
 	}
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { OutcomeRound, Player, RoundDisplayMode, EditCallback, SupportedPlayerArray } from '$lib';
-	import Round from './Round.svelte';
+	import Round from '../components/Round.svelte';
 
 	type Props = {
 		players: SupportedPlayerArray;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { OutcomeRound, Player, PlayerOutcome, SupportedPlayerArray } from '$lib';
-	import EditWindowPlayerBox from './EditWindowPlayerBox.svelte';
+	import EditWindowPlayerBox from '../components/EditWindowPlayerBox.svelte';
 
 	type Props = {
 		round: OutcomeRound;
@@ -78,7 +78,7 @@
 		gap: 1dvh;
 		flex-direction: column;
 		justify-content: space-between;
-		max-height: 75dvh
+		max-height: 75dvh;
 		height: 75dvh;
 		overflow-y: scroll;
 	}

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import Toolbar from './Toolbar.svelte';
-	import Main from './Main.svelte';
+	import Toolbar from '../components/Toolbar.svelte';
+	import Main from '../main/Main.svelte';
 	import {
 		type OutcomeRound,
 		type GameSetup,
@@ -12,9 +12,9 @@
 		roundsHaveValuableContent,
 		type RoundDisplayMode
 	} from '$lib';
-	import EditWindow from './EditWindow.svelte';
-	import NewGameWindow from './NewGameWindow.svelte';
-	import NewGameConfirmDialog from './NewGameConfirmDialog.svelte';
+	import EditWindow from '../dialogs/EditWindow.svelte';
+	import NewGameWindow from '../dialogs/NewGameWindow.svelte';
+	import NewGameConfirmDialog from '../dialogs/NewGameConfirmDialog.svelte';
 	import { ModalMatte, ThemeProvider, type ThemeName } from '@themillhousegroup/svelte-common-ui';
 	import { ALL_THEMES } from '$lib/theming';
 
