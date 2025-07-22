@@ -17,6 +17,7 @@
 	import NewGameConfirmDialog from '../dialogs/NewGameConfirmDialog.svelte';
 	import { ModalMatte, ThemeProvider, type ThemeName } from '@themillhousegroup/svelte-common-ui';
 	import { ALL_THEMES } from '$lib/theming';
+	import TipCallout from '../components/TipCallout.svelte';
 
 	let gameSetup: GameSetup = $state(retrieveGameSetup(browser));
 	let rounds: Array<OutcomeRound> = $state([]);
@@ -32,11 +33,21 @@
 	let showEditWindowForRound: number = $state(-1);
 	let editWindowInitiallyFocusedPlayerIndex: number = $state(-1);
 
+	// Move to settings later...
+	let showTips = $state(false);
+
+	let showFirstRoundTip = $state(false);
+	let showAddRoundTip = $state(false);
+
 	function startEditing(roundNumber: number, playerIndex: number) {
 		showEditWindowForRound = roundNumber;
 		editWindowInitiallyFocusedPlayerIndex = playerIndex;
 	}
 	function stopEditing() {
+		if (showEditWindowForRound === 0) {
+			showFirstRoundTip = false;
+			showAddRoundTip = showTips;
+		}
 		showEditWindowForRound = -1;
 	}
 
@@ -58,6 +69,8 @@
 		gameSetup = newGameSetup;
 		rounds = [createRound(newGameSetup.numPlayers)];
 		storeGameSetup(newGameSetup);
+
+		showFirstRoundTip = showTips;
 	}
 
 	function onAddRound() {
@@ -65,6 +78,7 @@
 			rounds.push(createRound(gameSetup.numPlayers));
 			focusedRoundIndex = rounds.length - 1;
 		}
+		showAddRoundTip = false;
 	}
 	function roundUpdated(roundNumber: number, newRound: OutcomeRound) {
 		if (rounds.length > roundNumber) {
@@ -88,6 +102,12 @@
 				onCellClicked={startEditing}
 				{roundDisplayMode}
 			/>
+
+			{#if showFirstRoundTip}
+				<TipCallout --width="12em">
+					Tap this row to enter the scores for the first round
+				</TipCallout>
+			{/if}
 
 			{#if showNewGameConfirmDialog}
 				<ModalMatte onMatteClicked={() => handleNewGameConfirm(false)}>
@@ -113,6 +133,13 @@
 					/>
 				</ModalMatte>
 			{/if}
+
+			{#if showAddRoundTip}
+				<TipCallout --width="12em">
+					Tap <i><strong>"Add Round"</strong></i> to add a row for the next round
+				</TipCallout>
+			{/if}
+
 			<Toolbar {onNewGame} {roundDisplayMode} {onToggleDisplayMode} {onAddRound} />
 		
 	</div>

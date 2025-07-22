@@ -4,14 +4,18 @@ A scoring app for Dutch Blitz, in Svelte/SvelteKit
 
 ## Features
 
-- Supports 2-4 players
+- Supports 2-8 players
 - Automatic score [re-]calculation
 - Game-specific "just enough" UI
 - Light/Dark mode
 
 ## Still Todo
-
-- Support up to 8 players
+- Can we force the browser to hide the chrome? The back button can interfere
+- Store the actual game state whenever it changes (to avoid reset on accidental back-navigation)
+- Tips for first-time players
+  - Settings checkbox
+  - Point to the empty row once the game begins
+  - Point to the "add row" button once one round is complete 
 
 
 ## Developing
