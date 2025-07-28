@@ -10,7 +10,7 @@ A scoring app for Dutch Blitz, in Svelte/SvelteKit
 - Light/Dark mode
 
 ## Still Todo
-- Can we force the browser to hide the chrome? The back button can interfere
+- Can we force the browser to hide the chrome? The back button can interfere (answer: probably not)
 - Store the actual game state whenever it changes (to avoid reset on accidental back-navigation)
 - Tips for first-time players
   - Settings checkbox

@@ -213,6 +213,7 @@ export const DEFAULT_PLAYERS: EightPlayerArray = [
 		},
 	] as const;
 
+const DEFAULT_NUMBER_OF_PLAYERS = 4; 	
 export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {
 	if (isBrowser) {
 		const existing = window.localStorage.getItem(LOCALSTORAGE_KEY);
@@ -223,7 +224,7 @@ export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {
 
 	return {
 		themeName: CORE_THEME_NAMES[0],
-		numPlayers: DEFAULT_PLAYERS.length,
-		players: DEFAULT_PLAYERS
+		numPlayers: DEFAULT_NUMBER_OF_PLAYERS,
+		players: DEFAULT_PLAYERS.slice(0, DEFAULT_NUMBER_OF_PLAYERS) as unknown as FourPlayerArray
 	}
 };
