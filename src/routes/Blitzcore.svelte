@@ -8,6 +8,7 @@
 		type Player,
 		storeGameSetup,
 		retrieveGameSetup,
+		storeCurrentGame,
 		createRound,
 		roundsHaveValuableContent,
 		type RoundDisplayMode
@@ -83,6 +84,7 @@
 	function roundUpdated(roundNumber: number, newRound: OutcomeRound) {
 		if (rounds.length > roundNumber) {
 			rounds[roundNumber] = newRound;
+			storeCurrentGame(rounds);
 		}
 	}
 

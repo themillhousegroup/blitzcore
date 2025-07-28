@@ -172,10 +172,10 @@ export const createRound = (numPlayers: number): OutcomeRound => {
 		outcomes
 	};
 };
-const LOCALSTORAGE_KEY = "blitzcoreGameSetup";
+const LOCALSTORAGE_KEY_SETUP = "blitzcoreGameSetup";
 
 export const storeGameSetup = (setup: GameSetup): void => {
-	window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(setup));
+	window.localStorage.setItem(LOCALSTORAGE_KEY_SETUP, JSON.stringify(setup));
 };
 
 export const DEFAULT_PLAYERS: EightPlayerArray = [
@@ -216,7 +216,7 @@ export const DEFAULT_PLAYERS: EightPlayerArray = [
 const DEFAULT_NUMBER_OF_PLAYERS = 4; 	
 export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {
 	if (isBrowser) {
-		const existing = window.localStorage.getItem(LOCALSTORAGE_KEY);
+		const existing = window.localStorage.getItem(LOCALSTORAGE_KEY_SETUP);
 		if (existing) {
 			return JSON.parse(existing) as GameSetup;
 		}
@@ -227,4 +227,10 @@ export const retrieveGameSetup = (isBrowser: boolean): GameSetup => {
 		numPlayers: DEFAULT_NUMBER_OF_PLAYERS,
 		players: DEFAULT_PLAYERS.slice(0, DEFAULT_NUMBER_OF_PLAYERS) as unknown as FourPlayerArray
 	}
+};
+
+const LOCALSTORAGE_KEY_CURRENT_GAME = "blitzcoreCurrentGame";
+
+export const storeCurrentGame = (game: Array<OutcomeRound>): void => {
+	window.localStorage.setItem(LOCALSTORAGE_KEY_CURRENT_GAME, JSON.stringify(game));
 };
